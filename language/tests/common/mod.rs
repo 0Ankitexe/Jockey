@@ -94,8 +94,7 @@ pub fn normalized_json(bytes: &[u8]) -> Result<Vec<u8>, Box<dyn Error>> {
 }
 
 pub fn ast_schema() -> Result<Value, Box<dyn Error>> {
-    let path = repository_root()
-        .join("shared/compiler-contracts/ast-v1.schema.json");
+    let path = repository_root().join("shared/compiler-contracts/ast-v1.schema.json");
     Ok(serde_json::from_str(&fs::read_to_string(path)?)?)
 }
 

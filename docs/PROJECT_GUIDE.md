@@ -227,23 +227,24 @@ separate per-run evidence, not extra project documents.
 
 ## 8. How to set up and run the project
 
-The compiler demo needs Rust **1.98.1 or newer**, a C compiler/linker and
-Python **3.12**. The optional dashboard needs Node **22.20+ on the 22.x line**.
+The compiler demo needs Rust **1.98.1 or newer** and a C compiler/linker.
+The optional controller/dashboard needs Python **3.12** and Node **22.20+ on the 22.x line**.
 Docker and a VM are not needed for the sample-data demo.
 
 ```bash
 cd /path/to/JOCKEY
-cargo fetch --locked
-cargo build --workspace --locked --offline
+bash scripts/setup.sh --demo
 ```
 
 On another computer, use its repository location in the first command.
 Dependency fetching needs internet access once; cached builds can run offline.
-The Python preparation command makes the bundled old schema available to the
-preserved compiler tests. The optional `journal` collector build additionally
+The script checks prerequisites, fetches locked dependencies and builds the
+workspace. The optional `journal` collector build additionally
 needs libsystemd development files; see the [collector guide](reference/linux-collectors.md).
 
-For the optional controller/dashboard demonstration, install dependencies:
+For the optional controller/dashboard demonstration, run `bash scripts/setup.sh --full`
+instead of `--demo`. It also installs the Python and Node project dependencies.
+The equivalent manual commands are:
 
 ```bash
 python3.12 -m venv controller/.venv

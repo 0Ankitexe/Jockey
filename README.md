@@ -135,14 +135,14 @@ endpoint task execution and dashboard results are later milestones.
 | Dashboard          | React, TypeScript, Vite                                      | Controller status interface                                  |
 | Quality checks     | Cargo, Pytest, Vitest, React Testing Library, GitHub Actions | Local tests and configured CI                                |
 
-## Requirements
+## Requirements and first-time setup
 
 The commands below use Bash on Linux. Install these prerequisites before setup:
 
 | Tool               | Requirement                                                                                        |
 | ------------------ | -------------------------------------------------------------------------------------------------- |
 | Git                | Clone and manage the repository                                                                    |
-| Rust               | Current stable toolchain, Cargo, Rustfmt and Clippy                                                |
+| Rust               | **1.98.1 or newer**, with Cargo; Rustfmt and Clippy for development checks                         |
 | Native build tools | A C compiler/linker and standard development tools for Rust dependencies                           |
 | Python             | **3.12**, including `venv` and pip; the controller requires `>=3.12,<3.13`                         |
 | Node.js and npm    | Use **Node 22.20+ on the 22.x line** for the dashboard; locally tested with 22.22.2                |
@@ -150,6 +150,23 @@ The commands below use Bash on Linux. Install these prerequisites before setup:
 
 The recorded local environment uses Fedora Linux, Rust 1.98.1, Python 3.12.13 and
 Node 22.22.2. This is development verification, not live collector certification.
+
+After cloning, run one of these from the repository root:
+
+```bash
+bash scripts/setup.sh --demo   # Fetch Rust dependencies and build the offline CLI demo
+bash scripts/setup.sh --full   # Also create the Python environment and install dashboard packages
+bash scripts/setup.sh --check  # Check all prerequisites without installing or building anything
+```
+
+The script checks tool versions first and reports missing system tools. Install
+those tools through your operating system or their official installers, then
+rerun it. It does not use `sudo`, change system packages, start services, or
+collect host data. `--demo` needs Rust and a C compiler. `--full` and `--check`
+also need Python 3.12 with `venv` and pip, plus Node 22.20+ and npm. The first
+`--demo`/`--full` run downloads dependencies; later builds use the locked Rust
+dependencies offline. Docker Compose, libsystemd development files, and the
+Debian lab VM are optional for these setup paths.
 
 > **Rust compatibility:** The workspace requires **Rust 1.98.1 or newer**.
 > This deliberately narrow minimum replaces the earlier unverified 1.85 claim.
@@ -193,7 +210,8 @@ cargo fetch --locked
 cargo build --workspace --locked --offline
 ```
 
-The preserved parser tests read the tracked AST schema from
+Alternatively, run `bash scripts/setup.sh --demo` to fetch dependencies and
+build in one step. The preserved parser tests read the tracked AST schema from
 `shared/compiler-contracts/ast-v1.schema.json`.
 
 Dependency installation requires network access unless already cached. Subsequent
@@ -294,6 +312,9 @@ submit investigations or display fixture reports.
 ### Install development dependencies
 
 From the repository root:
+
+`bash scripts/setup.sh --full` performs these steps after building Rust. To run
+them manually:
 
 ```bash
 python3.12 -m venv controller/.venv
@@ -458,14 +479,13 @@ From the repository root:
 | Shared contracts    | Valid/invalid JSON fixtures, required identifiers, closed enums and timestamp rules                           |
 | Controller          | Configuration, typed responses/errors, CORS and health/version routes using an in-process client              |
 | Dashboard           | Loading, successful responses, unavailable services, invalid responses and cancellation                       |
-| Preparation utility | Exact schema copying, idempotence, conflict refusal and failure handling                                      |
 
 Recorded local test results:
 
 | Component     | Result                                                         |
 | ------------- | -------------------------------------------------------------- |
 | Rust          | 342 unit/integration tests and 5 compile-fail doctests passed  |
-| Python        | 52 controller tests and 11 preparation-utility tests passed    |
+| Python        | 52 controller tests passed                                      |
 | Dashboard     | 18 tests and production build passed                           |
 | Quality gates | Rust/Python/TypeScript formatting, lint and type checks passed |
 | Compose       | Configuration validated; no live deployment claim              |
@@ -532,7 +552,7 @@ remain unverified. See the [support matrix](docs/reference/linux-support-matrix.
 
 ## Documentation
 
-- [Project and Viva Guide](docs/PROJECT_GUIDE.md) — start here for the whole
+- [Project Guide](docs/PROJECT_GUIDE.md) — start here for the whole
   project through Version 5, the demo and a plain-English map of both folders.
 - [Current state](docs/current-state.md) — the latest implemented and tested scope.
 - [Documentation index](docs/README.md) — technical references, grouped by topic.

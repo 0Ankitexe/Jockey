@@ -111,6 +111,13 @@ jobs:
       - run: python -m ruff check .
       - run: python -m mypy
       - run: python -m pytest
+      - name: Check checkout setup helper
+        working-directory: .
+        run: |
+          bash -n scripts/setup.sh
+          python -m ruff format --check --config controller/pyproject.toml tests/test_setup.py
+          python -m ruff check --config controller/pyproject.toml tests/test_setup.py
+          python -m pytest tests/test_setup.py
       - name: Check native boundary utility offline
         working-directory: .
         run: |
