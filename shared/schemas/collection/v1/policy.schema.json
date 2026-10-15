@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1/policy.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "policy_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "endpoint_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "approved_profile": {
+      "const": "lab-small-v1"
+    },
+    "valid_from": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "valid_until": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "scope": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Scope"
+    },
+    "limits": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Limits"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/SourceRef"
+      },
+      "minItems": 0,
+      "maxItems": 64,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "policy_id",
+    "endpoint_id",
+    "approved_profile",
+    "valid_from",
+    "valid_until",
+    "scope",
+    "limits",
+    "sources"
+  ],
+  "additionalProperties": false
+}

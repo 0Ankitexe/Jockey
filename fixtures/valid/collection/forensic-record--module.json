@@ -1,0 +1,79 @@
+{
+  "schema_version": "2.0.0",
+  "record_id": "130957f1-1f1a-81cf-9193-e18ef0f0a3f8",
+  "context": {
+    "mode": "local_lab",
+    "collection_id": "10000000-0000-4000-8000-000000000007",
+    "case_id": "10000000-0000-4000-8000-000000000005",
+    "operator_id": "10000000-0000-4000-8000-000000000003",
+    "endpoint_id": "10000000-0000-4000-8000-000000000002",
+    "designation_id": "10000000-0000-4000-8000-000000000001",
+    "authorisation_id": "10000000-0000-4000-8000-000000000004",
+    "policy_id": "10000000-0000-4000-8000-000000000006"
+  },
+  "collected_at": {
+    "value": "2020-01-01T00:00:00Z",
+    "basis": "local_clock",
+    "uncertainty_ms": null,
+    "clock_uncertain": false
+  },
+  "collector": {
+    "name": "drivers",
+    "version": "1.0.0",
+    "adapter": "linux.modules-v1"
+  },
+  "category": "driver",
+  "severity": "informational",
+  "record_type": "module",
+  "sequence": 0,
+  "provenance": {
+    "source_id": "10000000-0000-4000-8000-000000000008",
+    "source_kind": "sys_modules",
+    "observed_start": {
+      "value": "2020-01-01T00:00:00Z",
+      "basis": "local_clock",
+      "uncertainty_ms": null,
+      "clock_uncertain": false
+    },
+    "observed_end": {
+      "value": "2020-01-01T00:00:00Z",
+      "basis": "local_clock",
+      "uncertainty_ms": null,
+      "clock_uncertain": false
+    },
+    "policy_sha256": "c1cbb104b235ffd1aa9985a8b067a513060472d76e8577b00e067623583f91ba",
+    "authorisation_sha256": "72f14f5b3469116b7a57b011d61c73a735774637bb4732132a769fdafa64d762",
+    "request_sha256": "055f19ed8522fc6d917e760170c94273c8e279c7d1467874088307c0bf921cd4",
+    "source_scope": {
+      "kind": "facility",
+      "source_id": "10000000-0000-4000-8000-000000000008",
+      "namespace": "current"
+    },
+    "indicator_set_sha256": null,
+    "rules_version": null
+  },
+  "payload": {
+    "name": "synthetic",
+    "size_bytes": {
+      "state": "available",
+      "value": 0
+    },
+    "reference_count": {
+      "state": "available",
+      "value": 0
+    },
+    "state": "synthetic",
+    "version": {
+      "state": "available",
+      "value": "synthetic"
+    },
+    "source_version": {
+      "state": "available",
+      "value": "synthetic"
+    }
+  },
+  "details": {
+    "linux": {}
+  },
+  "content_sha256": "c7d0c673c316b8790276b92ecedd96ef95e1573bdc0f4935fcf6e574560371f2"
+}

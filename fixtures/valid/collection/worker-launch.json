@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.1.0",
+  "worker_schema_version": "1.0.0",
+  "collection_id": "10000000-0000-4000-8000-000000000007",
+  "job": "collect",
+  "clock_basis": "linux_clock_monotonic",
+  "invocation_origin": { "utc": "2020-01-01T00:00:00Z", "monotonic_ms": 1000 },
+  "launch_observed": { "utc": "2020-01-01T00:00:01Z", "monotonic_ms": 2000 },
+  "parent": { "pid": 123, "uid": 1000, "start_ticks": "1" },
+  "start_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "record_base": 0,
+  "error_base": 0,
+  "global_limits": {
+    "max_records": 10000,
+    "max_report_bytes": 10485760,
+    "max_source_bytes": 67108864,
+    "max_file_bytes": 16777216,
+    "max_item_bytes": 65536,
+    "max_errors": 1000,
+    "max_entries": 20000,
+    "max_depth": 16,
+    "max_indicator_comparisons": 10000000,
+    "timeout_ms": 60000,
+    "operation_timeout_ms": 2000,
+    "max_staging_bytes": 83886080,
+    "max_memory_bytes": 268435456
+  },
+  "allowance": {
+    "records": 10000,
+    "report_bytes": 10485760,
+    "source_bytes": 67108864,
+    "errors": 1000,
+    "entries": 20000,
+    "indicator_comparisons": 10000000,
+    "staging_bytes": 83886080,
+    "retained_bytes": 201326592
+  },
+  "descriptors": [
+    {
+      "kind": "proc_mount",
+      "subject_id": "10000000-0000-4000-8000-000000000008",
+      "fd": 3,
+      "object": { "device_id": "1", "inode": "10", "mount_id": "1" }
+    }
+  ],
+  "config_exclusions": [
+    { "device_id": "1", "inode": "11", "mount_id": "1" },
+    { "device_id": "1", "inode": "12", "mount_id": "1" },
+    { "device_id": "1", "inode": "13", "mount_id": "1" },
+    { "device_id": "1", "inode": "14", "mount_id": "1" }
+  ]
+}

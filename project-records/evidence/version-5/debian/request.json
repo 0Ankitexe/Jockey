@@ -1,0 +1,59 @@
+{
+  "authorisation_id": "75515e95-f306-49c4-b2bf-a2f89e265022",
+  "capabilities": [
+    "system",
+    "processes",
+    "network",
+    "files",
+    "events",
+    "indicators"
+  ],
+  "case_id": "2c1f188c-eef1-46d8-9be5-95f1c1c64218",
+  "collection_id": "7368d2ef-3fb4-4229-94c7-0b02c7e8ce18",
+  "collectors": [
+    "system",
+    "processes",
+    "connections",
+    "files",
+    "events",
+    "indicators"
+  ],
+  "designation_id": "d2cd2206-116f-42c3-92c6-fc68cc1d0dbc",
+  "endpoint_id": "77dad005-1930-4c68-b499-f8cd4dc058b4",
+  "event_window": {
+    "end": "2026-10-16T01:20:15Z",
+    "start": "2026-10-15T22:18:15Z"
+  },
+  "indicator_set_id": "4c8c5935-026b-4e1a-9bae-951ee06a0a2b",
+  "limits": {
+    "max_depth": 16,
+    "max_entries": 20000,
+    "max_errors": 1000,
+    "max_file_bytes": 16777216,
+    "max_indicator_comparisons": 10000000,
+    "max_item_bytes": 65536,
+    "max_memory_bytes": 268435456,
+    "max_records": 10000,
+    "max_report_bytes": 10485760,
+    "max_source_bytes": 67108864,
+    "max_staging_bytes": 83886080,
+    "operation_timeout_ms": 2000,
+    "timeout_ms": 60000
+  },
+  "operator_id": "41689e0d-82d2-4857-82af-f56d8d128c4f",
+  "paths": [
+    {
+      "relative_path": "lab-small-template-only",
+      "root_id": "98a0f1d6-d82c-4d15-adbd-f5352abb841a"
+    }
+  ],
+  "policy_id": "c5a56fc2-38a6-4b49-8782-c25aa957f646",
+  "profile": "lab-small-v1",
+  "schema_version": "1.0.0",
+  "source_ids": [
+    "935db04a-d51e-4f23-9ec5-e2d4fa61067b",
+    "bd30f0d3-da72-4b50-b766-1738a3d337b7",
+    "9e4a06b6-bfbe-47df-8f6e-8c574178c35a",
+    "5e9f6432-721a-409e-a91d-5ea3599255f8"
+  ]
+}

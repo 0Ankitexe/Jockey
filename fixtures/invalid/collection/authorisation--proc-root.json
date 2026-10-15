@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "authorisation_id": "10000000-0000-4000-8000-000000000004",
+  "designation_id": "10000000-0000-4000-8000-000000000001",
+  "operator_id": "10000000-0000-4000-8000-000000000003",
+  "case_id": "10000000-0000-4000-8000-000000000005",
+  "endpoint_id": "10000000-0000-4000-8000-000000000002",
+  "approved_profile": "lab-small-v1",
+  "valid_from": "2020-01-01T00:00:00Z",
+  "valid_until": "2020-01-01T01:00:00Z",
+  "scope": {
+    "capabilities": [
+      "system"
+    ],
+    "source_groups": [
+      "kernel_profile"
+    ],
+    "roots": [
+      {
+        "root_id": "10000000-0000-4000-8000-000000000005",
+        "absolute_path": "/proc/1",
+        "purposes": [
+          "files"
+        ]
+      }
+    ],
+    "event_window": {
+      "start": "2020-01-01T00:00:00Z",
+      "end": "2020-01-01T01:00:00Z"
+    }
+  },
+  "limits": {
+    "max_records": 10000,
+    "max_report_bytes": 10485760,
+    "max_source_bytes": 67108864,
+    "max_file_bytes": 16777216,
+    "max_item_bytes": 65536,
+    "max_errors": 1000,
+    "max_entries": 20000,
+    "max_depth": 16,
+    "max_indicator_comparisons": 10000000,
+    "timeout_ms": 60000,
+    "operation_timeout_ms": 2000,
+    "max_staging_bytes": 83886080,
+    "max_memory_bytes": 268435456
+  }
+}

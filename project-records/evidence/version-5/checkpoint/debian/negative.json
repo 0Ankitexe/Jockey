@@ -1,0 +1,10 @@
+{
+  "after_sha256": "87d4e779f5aa032baa53b954e55263ebe12084359d62d452d1c7c064a6e98c69",
+  "before_sha256": "87d4e779f5aa032baa53b954e55263ebe12084359d62d452d1c7c064a6e98c69",
+  "collision_exit": 3,
+  "collision_output": "{\"schema_version\":\"1.0.0\",\"code\":\"OutputExists\",\"stage\":\"admission\"}",
+  "denial_exit": 3,
+  "denial_output": "{\"schema_version\":\"1.0.0\",\"code\":\"InvalidInput\",\"stage\":\"arguments\"}",
+  "denied_output_absent": true,
+  "original_scratch_file_present": true
+}

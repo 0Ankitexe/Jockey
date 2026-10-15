@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1/lab-scenario.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "approval_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "inventory_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "designation_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "authorisation_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "endpoint_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "case_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "operator_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "valid_from": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "valid_until": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "scenario": {
+      "type": "string",
+      "enum": [
+        "checkpoint",
+        "lab-small"
+      ]
+    },
+    "collector_sha256": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+    },
+    "owned_scratch_root": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/AbsolutePath"
+    },
+    "output_root": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/AbsolutePath"
+    },
+    "allowed_actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "create_benign_processes",
+          "bind_loopback_tcp",
+          "create_sample_files",
+          "emit_benign_log_markers",
+          "cleanup_owned_objects"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 5,
+      "uniqueItems": true
+    },
+    "cold_preparation_reference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^\\u0000]*$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "approval_id",
+    "inventory_id",
+    "designation_id",
+    "authorisation_id",
+    "endpoint_id",
+    "case_id",
+    "operator_id",
+    "valid_from",
+    "valid_until",
+    "scenario",
+    "collector_sha256",
+    "owned_scratch_root",
+    "output_root",
+    "allowed_actions",
+    "cold_preparation_reference"
+  ],
+  "additionalProperties": false
+}

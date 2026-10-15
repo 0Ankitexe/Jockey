@@ -1,0 +1,16 @@
+Installer image: /home/zer0/Downloads/debian-13.7.0-amd64-netinst.iso
+Verification date: 2026-10-15
+Key fingerprint: DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+Key identity: Debian CD signing key <debian-cd@lists.debian.org>
+Source: https://www.debian.org/CD/verify.html
+
+gpgv --keyring /home/zer0/.local/share/jocky-v5-vms/verify-debian/debian-signers.gpg installer-SHA256SUMS.sign installer-SHA256SUMS
+gpgv: Signature made Sat Sep 12 21:50:46 2026 IST
+gpgv:                using RSA key DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+gpgv: Good signature from "Debian CD signing key <debian-cd@lists.debian.org>"
+
+Signed SHA256SUMS line:
+a7ef94ac2fb9a7fec454552abd629b7cc9d5155c886165a45649f5ce6167e355  debian-13.7.0-amd64-netinst.iso
+
+Observed sha256sum:
+a7ef94ac2fb9a7fec454552abd629b7cc9d5155c886165a45649f5ce6167e355  /home/zer0/Downloads/debian-13.7.0-amd64-netinst.iso

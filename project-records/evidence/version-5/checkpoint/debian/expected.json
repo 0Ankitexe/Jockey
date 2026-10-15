@@ -1,0 +1,20 @@
+{
+  "connection": {
+    "local_address": "127.0.0.1",
+    "local_port": 43872,
+    "remote_address": "127.0.0.1",
+    "remote_port": 42695,
+    "socket_inode": "15570"
+  },
+  "file": {
+    "label": "jocky-checkpoint-6przn190/sample.txt",
+    "root_id": "98a0f1d6-d82c-4d15-adbd-f5352abb841a",
+    "sha256": "974ce96b482433df8e92096aab1662a2ada4299ed38d2783ab21ea144e0eade1",
+    "size_bytes": 34
+  },
+  "process": {
+    "boot_id": "b1f6e849-ca4d-4201-afa0-99d589be3338",
+    "pid": 1606,
+    "start_ticks": "61140"
+  }
+}

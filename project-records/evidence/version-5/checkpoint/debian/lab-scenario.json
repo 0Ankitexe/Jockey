@@ -1,0 +1,23 @@
+{
+  "allowed_actions": [
+    "create_benign_processes",
+    "bind_loopback_tcp",
+    "create_sample_files",
+    "cleanup_owned_objects"
+  ],
+  "approval_id": "ae2a27fa-47d6-441d-8538-ad3b3f3f7f5e",
+  "authorisation_id": "bc8a9fa1-3474-4cf5-ba78-ab2548cb7452",
+  "case_id": "2c1f188c-eef1-46d8-9be5-95f1c1c64218",
+  "cold_preparation_reference": "2026-10-15 clean-install revert, diagnostics, renewed host preflight on pinned disk",
+  "collector_sha256": "934f25754c902fa68d4e9d992dfef021aca93f8f28b511a2c922db453b65ae28",
+  "designation_id": "c8349c0e-7a19-44ee-817e-4657637badbb",
+  "endpoint_id": "77dad005-1930-4c68-b499-f8cd4dc058b4",
+  "inventory_id": "ea2f7e37-af2c-4411-92fe-d6fe8b2c40f1",
+  "operator_id": "41689e0d-82d2-4857-82af-f56d8d128c4f",
+  "output_root": "/home/jockylab/jocky-output",
+  "owned_scratch_root": "/home/jockylab/jocky-scratch",
+  "scenario": "checkpoint",
+  "schema_version": "1.0.0",
+  "valid_from": "2026-10-15T06:39:49Z",
+  "valid_until": "2026-10-15T09:44:49Z"
+}

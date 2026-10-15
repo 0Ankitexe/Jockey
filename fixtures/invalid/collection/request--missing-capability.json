@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "collection_id": "10000000-0000-4000-8000-000000000007",
+  "case_id": "10000000-0000-4000-8000-000000000005",
+  "operator_id": "10000000-0000-4000-8000-000000000003",
+  "endpoint_id": "10000000-0000-4000-8000-000000000002",
+  "designation_id": "10000000-0000-4000-8000-000000000001",
+  "authorisation_id": "10000000-0000-4000-8000-000000000004",
+  "policy_id": "10000000-0000-4000-8000-000000000006",
+  "profile": "lab-small-v1",
+  "capabilities": [
+    "system"
+  ],
+  "collectors": [
+    "processes"
+  ],
+  "source_ids": [
+    "10000000-0000-4000-8000-000000000008"
+  ],
+  "paths": [],
+  "event_window": {
+    "start": "2020-01-01T00:00:00Z",
+    "end": "2020-01-01T01:00:00Z"
+  },
+  "limits": {
+    "max_records": 10000,
+    "max_report_bytes": 10485760,
+    "max_source_bytes": 67108864,
+    "max_file_bytes": 16777216,
+    "max_item_bytes": 65536,
+    "max_errors": 1000,
+    "max_entries": 20000,
+    "max_depth": 16,
+    "max_indicator_comparisons": 10000000,
+    "timeout_ms": 60000,
+    "operation_timeout_ms": 2000,
+    "max_staging_bytes": 83886080,
+    "max_memory_bytes": 268435456
+  },
+  "indicator_set_id": null
+}

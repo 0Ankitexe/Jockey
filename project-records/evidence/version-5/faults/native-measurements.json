@@ -1,0 +1,299 @@
+{
+  "admission": {
+    "approval_id": "f8847f9c-2ed4-4b7e-8254-f9120db531f3",
+    "at": "2026-10-15T07:43:04Z",
+    "inventory_id": "6bba2b7c-c3f4-4fcc-8dbb-826a648d2967",
+    "passed": true
+  },
+  "cases": {
+    "cancel-35ms": {
+      "code": "Cancelled",
+      "elapsed_ms": 148,
+      "exit": 130,
+      "output_exists": true,
+      "report_sha256": "1f326d0fa8fc234053cb8e24d33c9b9eec1cae63096109930f6c993d4ab89f56",
+      "signal_sent": true,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 0,
+        "omitted_known": 0,
+        "omitted_unknown": true,
+        "report_bytes": 2719,
+        "source_bytes": 67108864,
+        "status": "failed",
+        "stop_reason": "Cancelled",
+        "worker_cleanup": "complete"
+      }
+    },
+    "cancel-60ms": {
+      "code": "Cancelled",
+      "elapsed_ms": 133,
+      "exit": 130,
+      "output_exists": true,
+      "report_sha256": "a630e74bb774c264a35bcf9d8387d1bb1deb263b00c7972e270da18177094cca",
+      "signal_sent": true,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 0,
+        "omitted_unknown": true,
+        "report_bytes": 3041,
+        "source_bytes": 67108864,
+        "status": "failed",
+        "stop_reason": "Cancelled",
+        "worker_cleanup": "complete"
+      }
+    },
+    "expired-policy": {
+      "code": "AuthorisationExpired",
+      "elapsed_ms": 11,
+      "exit": 3,
+      "output_exists": false
+    },
+    "limit-boundary": {
+      "code": null,
+      "elapsed_ms": 17,
+      "exit": 0,
+      "output_exists": null
+    },
+    "limit-plus-one": {
+      "code": "InvalidInput",
+      "elapsed_ms": 11,
+      "exit": 3,
+      "output_exists": null
+    },
+    "publication-collision": {
+      "after_sha256": "87d4e779f5aa032baa53b954e55263ebe12084359d62d452d1c7c064a6e98c69",
+      "code": "OutputExists",
+      "elapsed_ms": 16,
+      "exit": 3,
+      "output_exists": true,
+      "prior_sha256": "87d4e779f5aa032baa53b954e55263ebe12084359d62d452d1c7c064a6e98c69"
+    },
+    "publication-write-fault": {
+      "code": "WorkerFailed",
+      "elapsed_ms": 503,
+      "exit": 5,
+      "new_output_entries": [],
+      "output_exists": false
+    },
+    "scope-traversal": {
+      "code": "InvalidInput",
+      "elapsed_ms": 12,
+      "exit": 3,
+      "output_exists": null
+    },
+    "source-disappeared": {
+      "code": "PublishedFailed",
+      "elapsed_ms": 114,
+      "exit": 5,
+      "output_exists": true,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 2989,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "NotFound",
+        "worker_cleanup": "complete"
+      }
+    },
+    "source-permission": {
+      "code": "PublishedFailed",
+      "elapsed_ms": 110,
+      "exit": 5,
+      "output_exists": true,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 3029,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "PermissionDenied",
+        "worker_cleanup": "complete"
+      }
+    }
+  },
+  "collector_sha256": "df837e13e70ace469a17f9dc9c76a351d5dbd92171c2cafd59e6013774a174b6",
+  "fault_plans_admitted": 4,
+  "host_preflight_sha256": "24460b563f22737286e6c31088d435fc88ab2d459ba3b6ff8119259913e76338",
+  "inventory_sha256": "fb0326a40db285f40a2b5aa93a442a7ef300deebaa2e3c340dc473383709c37c",
+  "machine_id": "8eda7802cadd47b48437c16e12730bea",
+  "post_worker_pids_empty": true,
+  "race_runs": [
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 157,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "29a93aeb86647a3fcc1aad213dd46f09e1274ae23a3e627201361916bb8d470b",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 2989,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "NotFound",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4427
+    },
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 174,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "8563195a0d43545a1fd2ccd6bbbf3b8cf527ceca6824592e2b3a7031404f58de",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 2989,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "NotFound",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4306
+    },
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 156,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "13cb6419d7d11d706ca523f051329b3f248be30161de30ce9fba29026771b30f",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 2989,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "NotFound",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4250
+    },
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 154,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "00e53cf40d1ddaaeb03e6c207c52aa80662770419de5d265a2d4039f632310d3",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 3034,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "SourceDisappeared",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4257
+    },
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 156,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "781269f5181682e3d524dd0fd12c67a7654e605c0ce1db97feb80d5ac95e0017",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 3014,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "SourceChanged",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4429
+    },
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 156,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "ba70923675dae98da39fda903f19cf138ed697a364ba56697b1a53177bbb789e",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 2989,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "NotFound",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4470
+    },
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 155,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "1bec349ac705ac3f8216c64a87f66307a4aeae0e81252217aca321dab56604ce",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 2989,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "NotFound",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4483
+    },
+    {
+      "code": "PublishedFailed",
+      "elapsed_ms": 153,
+      "exit": 5,
+      "output_exists": true,
+      "report_contains_sentinel": false,
+      "report_sha256": "e458d68b5bf30a699e7cdf90793e1241e7d845c2f74b2cd71f6980b846be6be1",
+      "signal_sent": false,
+      "summary": {
+        "accepted_records": 0,
+        "errors": 1,
+        "omitted_known": 1,
+        "omitted_unknown": false,
+        "report_bytes": 2989,
+        "source_bytes": 0,
+        "status": "failed",
+        "stop_reason": "NotFound",
+        "worker_cleanup": "complete"
+      },
+      "switches": 4192
+    }
+  ],
+  "schema_version": "1.0.0",
+  "vm": "jocky-v5-debian-13-7"
+}

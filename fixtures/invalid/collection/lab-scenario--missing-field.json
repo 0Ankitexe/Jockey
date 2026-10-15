@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "inventory_id": "10000000-0000-4000-8000-000000000014",
+  "designation_id": "10000000-0000-4000-8000-000000000001",
+  "authorisation_id": "10000000-0000-4000-8000-000000000004",
+  "endpoint_id": "10000000-0000-4000-8000-000000000002",
+  "case_id": "10000000-0000-4000-8000-000000000005",
+  "operator_id": "10000000-0000-4000-8000-000000000003",
+  "valid_from": "2020-01-01T00:00:00Z",
+  "valid_until": "2020-01-01T01:00:00Z",
+  "scenario": "checkpoint",
+  "collector_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "owned_scratch_root": "/srv/jocky-synthetic-owned",
+  "output_root": "/srv/jocky-synthetic-output",
+  "allowed_actions": [
+    "create_benign_processes",
+    "bind_loopback_tcp",
+    "create_sample_files",
+    "cleanup_owned_objects"
+  ],
+  "cold_preparation_reference": "synthetic-only-never-live"
+}

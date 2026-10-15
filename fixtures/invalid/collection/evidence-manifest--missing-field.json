@@ -1,0 +1,28 @@
+{
+  "schema_version": "2.0.0",
+  "context": {
+    "mode": "local_lab",
+    "collection_id": "10000000-0000-4000-8000-000000000007",
+    "case_id": "10000000-0000-4000-8000-000000000005",
+    "operator_id": "10000000-0000-4000-8000-000000000003",
+    "endpoint_id": "10000000-0000-4000-8000-000000000002",
+    "designation_id": "10000000-0000-4000-8000-000000000001",
+    "authorisation_id": "10000000-0000-4000-8000-000000000004",
+    "policy_id": "10000000-0000-4000-8000-000000000006"
+  },
+  "created_at": {
+    "value": "2020-01-01T00:00:00Z",
+    "basis": "local_clock",
+    "uncertainty_ms": null,
+    "clock_uncertain": false
+  },
+  "entries": [
+    {
+      "record_id": "130957f1-1f1a-81cf-9193-e18ef0f0a3f8",
+      "sequence": 0,
+      "byte_length": 2087,
+      "sha256": "5177255597dfeef1e6e267a19d84aad41c73909f75648835820a5a451eee44ce"
+    }
+  ],
+  "content_sha256": "9279fae9765aee991029acaf11bcc68f7871e54abbdf207b8f7c28eccaa92490"
+}

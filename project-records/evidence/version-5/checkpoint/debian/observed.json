@@ -1,0 +1,74 @@
+{
+  "connection": {
+    "local_address": "127.0.0.1",
+    "local_port": 43872,
+    "record_id": "4e52feba-e338-8bf7-84d3-e9e477157fb0",
+    "remote_address": "127.0.0.1",
+    "remote_port": 42695,
+    "socket_inode": "15570"
+  },
+  "file": {
+    "location": {
+      "relative_path": "jocky-checkpoint-6przn190/sample.txt",
+      "root_id": "98a0f1d6-d82c-4d15-adbd-f5352abb841a"
+    },
+    "record_id": "2c1188ac-181d-8ffc-a93e-dc5fbfc8c04b",
+    "sha256": {
+      "state": "available",
+      "value": "974ce96b482433df8e92096aab1662a2ada4299ed38d2783ab21ea144e0eade1"
+    },
+    "size_bytes": {
+      "state": "available",
+      "value": 34
+    }
+  },
+  "process": {
+    "pid": 1606,
+    "record_id": "5ea000ef-3a33-88ec-b87d-d1389983491d",
+    "start_identity": {
+      "state": "available",
+      "value": {
+        "boot_id": "b1f6e849-ca4d-4201-afa0-99d589be3338",
+        "pid": 1606,
+        "start_ticks": "61140"
+      }
+    }
+  },
+  "summary": {
+    "accepted_records": 118,
+    "errors": 110,
+    "omitted_known": 0,
+    "omitted_unknown": false,
+    "report_bytes": 284952,
+    "source_bytes": 190809,
+    "status": "partial",
+    "stop_reason": "PermissionDenied",
+    "work_used": {
+      "entries": 1404,
+      "errors": 320,
+      "indicator_comparisons": 0,
+      "retained_bytes": 39833705,
+      "source_bytes": 190809,
+      "staging_bytes": 0
+    },
+    "worker_cleanup": "complete"
+  },
+  "system": {
+    "architecture": {
+      "state": "available",
+      "value": "x86_64"
+    },
+    "distribution_id": {
+      "state": "available",
+      "value": "debian"
+    },
+    "distribution_version": {
+      "state": "available",
+      "value": "13"
+    },
+    "kernel_release": {
+      "state": "available",
+      "value": "6.12.107+deb13-amd64"
+    }
+  }
+}

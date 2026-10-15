@@ -1,0 +1,58 @@
+[package]
+name = "jocky-native-linux"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "jocky-collect-linux"
+path = "src/main.rs"
+
+[[test]]
+name = "resource_adoption"
+path = "tests/resource_adoption.rs"
+harness = false
+
+[[test]]
+name = "resource_pipeline"
+path = "tests/resource_pipeline.rs"
+harness = false
+
+[[test]]
+name = "worker_ownership"
+path = "tests/worker_ownership.rs"
+harness = false
+
+[[test]]
+name = "worker_spawn"
+path = "tests/worker_spawn.rs"
+harness = false
+
+[[test]]
+name = "worker_signals"
+path = "tests/worker_signals.rs"
+harness = false
+
+[features]
+default = []
+journal = ["dep:systemd"]
+
+[dependencies]
+jocky-forensic = { path = "../../forensic-lib" }
+jocky-shared = { path = "../../shared" }
+base64 = "=0.22.1"
+serde_json.workspace = true
+tempfile = "=3.27.0"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+rustix = { version = "=1.1.5", features = ["fs", "process", "event", "system", "param", "net", "time"] }
+tokio = { version = "1", default-features = false, features = ["rt", "time", "io-util", "process", "signal", "sync", "net"] }
+zbus = { version = "=5.19.0", default-features = false, features = ["tokio"] }
+systemd = { version = "=0.10.1", optional = true, default-features = false, features = ["journal"] }
+
+[dev-dependencies]

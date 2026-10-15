@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "authorisation_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "designation_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "operator_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "case_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "endpoint_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "approved_profile": {
+      "const": "lab-small-v1"
+    },
+    "valid_from": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "valid_until": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "scope": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Scope"
+    },
+    "limits": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Limits"
+    }
+  },
+  "required": [
+    "schema_version",
+    "authorisation_id",
+    "designation_id",
+    "operator_id",
+    "case_id",
+    "endpoint_id",
+    "approved_profile",
+    "valid_from",
+    "valid_until",
+    "scope",
+    "limits"
+  ],
+  "additionalProperties": false
+}

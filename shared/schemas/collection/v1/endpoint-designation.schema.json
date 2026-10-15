@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "designation_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "endpoint_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "kind": {
+      "const": "isolated_vm"
+    },
+    "label": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Label"
+    },
+    "architecture": {
+      "const": "x86_64"
+    },
+    "abi": {
+      "const": "gnu"
+    },
+    "approved_operator_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+      },
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true
+    },
+    "valid_from": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "valid_until": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+    },
+    "lab_inventory_reference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[ -~]+$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "designation_id",
+    "endpoint_id",
+    "kind",
+    "label",
+    "architecture",
+    "abi",
+    "approved_operator_ids",
+    "valid_from",
+    "valid_until",
+    "lab_inventory_reference"
+  ],
+  "additionalProperties": false
+}

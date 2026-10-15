@@ -1,0 +1,91 @@
+{
+  "schema_version": "2.0.0",
+  "record_id": "130957f1-1f1a-81cf-9193-e18ef0f0a3f8",
+  "context": {
+    "mode": "local_lab",
+    "collection_id": "10000000-0000-4000-8000-000000000007",
+    "case_id": "10000000-0000-4000-8000-000000000005",
+    "operator_id": "10000000-0000-4000-8000-000000000003",
+    "endpoint_id": "10000000-0000-4000-8000-000000000002",
+    "designation_id": "10000000-0000-4000-8000-000000000001",
+    "authorisation_id": "10000000-0000-4000-8000-000000000004",
+    "policy_id": "10000000-0000-4000-8000-000000000006"
+  },
+  "collected_at": {
+    "value": "2020-01-01T00:00:00Z",
+    "basis": "local_clock",
+    "uncertainty_ms": null,
+    "clock_uncertain": false
+  },
+  "collector": {
+    "name": "system",
+    "version": "1.0.0",
+    "adapter": "linux.kernel-profile-v1"
+  },
+  "category": "system",
+  "severity": "informational",
+  "record_type": "profile",
+  "sequence": 0,
+  "provenance": {
+    "source_id": "10000000-0000-4000-8000-000000000008",
+    "source_kind": "kernel_profile",
+    "observed_start": {
+      "value": "2020-01-01T00:00:00Z",
+      "basis": "local_clock",
+      "uncertainty_ms": null,
+      "clock_uncertain": false
+    },
+    "observed_end": {
+      "value": "2020-01-01T00:00:00Z",
+      "basis": "local_clock",
+      "uncertainty_ms": null,
+      "clock_uncertain": false
+    },
+    "policy_sha256": "c1cbb104b235ffd1aa9985a8b067a513060472d76e8577b00e067623583f91ba",
+    "authorisation_sha256": "72f14f5b3469116b7a57b011d61c73a735774637bb4732132a769fdafa64d762",
+    "request_sha256": "055f19ed8522fc6d917e760170c94273c8e279c7d1467874088307c0bf921cd4",
+    "source_scope": {
+      "kind": "facility",
+      "source_id": "10000000-0000-4000-8000-000000000008",
+      "namespace": "current"
+    },
+    "indicator_set_sha256": null,
+    "rules_version": null
+  },
+  "payload": {
+    "os_family": "linux",
+    "kernel_release": {
+      "state": "available",
+      "value": "synthetic-kernel"
+    },
+    "kernel_version": {
+      "state": "available",
+      "value": "synthetic"
+    },
+    "architecture": {
+      "state": "available",
+      "value": "x86_64"
+    },
+    "hostname": {
+      "state": "available",
+      "value": "synthetic.invalid"
+    },
+    "distribution_id": {
+      "state": "available",
+      "value": "synthetic"
+    },
+    "distribution_version": {
+      "state": "available",
+      "value": "0"
+    },
+    "boot_id": {
+      "state": "available",
+      "value": "10000000-0000-4000-8000-000000000011"
+    },
+    "memory_dump": "forbidden"
+  },
+  "details": {
+    "linux": {}
+  },
+  "content_sha256": "c7d0c673c316b8790276b92ecedd96ef95e1573bdc0f4935fcf6e574560371f2"
+}

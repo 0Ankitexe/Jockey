@@ -1,0 +1,141 @@
+{
+  "format": "JOCKY-CJSON-1",
+  "purpose": "synthetic-test-only; canonical compatibility vectors, not a collection report",
+  "collection_id": "10000000-0000-4000-8000-000000000007",
+  "ids": {
+    "record": "130957f1-1f1a-81cf-9193-e18ef0f0a3f8",
+    "manifest": "2e239f93-3cb7-8897-bf08-302c44240cc2",
+    "error": "44d8e783-a2e4-8584-8843-177a659aceae"
+  },
+  "values": [
+    {
+      "name": "empty",
+      "value": {},
+      "canonical": "{}",
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "name": "scalars",
+      "value": [null, true, false, 0, -1, 9007199254740991, -9007199254740991],
+      "canonical": "[null,true,false,0,-1,9007199254740991,-9007199254740991]",
+      "sha256": "bb6c2dce4f77641afcc22611c5ce64532ef78bc79a6500972a9e37a0d426797d"
+    },
+    {
+      "name": "unicode-controls",
+      "value": {
+        "z": "é/😀\b\t\n\f\r\u0000\u0001\u001f\"\\",
+        "a": "é"
+      },
+      "canonical": "{\"a\":\"é\",\"z\":\"é/😀\\b\\t\\n\\f\\r\\u0000\\u0001\\u001f\\\"\\\\\"}",
+      "sha256": "6ca6a9bf9d9f84bee50e3b4c0a9f610e33f029cc0cf87a4f757d234e406cf2ce"
+    },
+    {
+      "name": "ordered-keys",
+      "value": {
+        "z": {
+          "b": 2,
+          "a": 1
+        },
+        "10": [],
+        "2": {},
+        "A": "/",
+        "a": "  "
+      },
+      "canonical": "{\"10\":[],\"2\":{},\"A\":\"/\",\"a\":\"  \",\"z\":{\"a\":1,\"b\":2}}",
+      "sha256": "e24a5b6d6eb4921a614bc89ac93e51cbc32db430c399e5ac5d0b86873f6e2fff"
+    }
+  ],
+  "invalid_values": [
+    {
+      "name": "float",
+      "value": 1.5
+    },
+    {
+      "name": "integral-float",
+      "value": 1.0
+    },
+    {
+      "name": "positive-overflow",
+      "value": 9007199254740992
+    },
+    {
+      "name": "negative-overflow",
+      "value": -9007199254740992
+    },
+    {
+      "name": "unicode-key",
+      "value": {
+        "é": 1
+      }
+    }
+  ],
+  "reports": [
+    {
+      "name": "complete",
+      "status": "complete",
+      "changes": [],
+      "report_bytes": 5607,
+      "sha256": "5af9b1948ab0e9a8df1e0725fb6cb3f63587a09658b62a4e601cefa234073589",
+      "manifest_sha256": "9279fae9765aee991029acaf11bcc68f7871e54abbdf207b8f7c28eccaa92490"
+    },
+    {
+      "name": "complete-empty",
+      "status": "complete",
+      "changes": [
+        ["/records", []],
+        ["/summary/accepted_records", 0],
+        ["/collectors/0/accepted_records", 0]
+      ],
+      "report_bytes": 3360,
+      "sha256": "c441f7acd0584c00f844fe6395a37df3c0db0f650aad832a2e1e99632548b3c8",
+      "manifest_sha256": "795d322d5b8daecf45c1ba6662a5f0b71aacaf9ddca533b5d4267ab1270a81c8"
+    },
+    {
+      "name": "partial",
+      "status": "partial",
+      "changes": [
+        [
+          "/records/0/payload/hostname",
+          {
+            "state": "unavailable",
+            "reason": "PermissionDenied"
+          }
+        ],
+        [
+          "/records/0/payload/kernel_version/value",
+          "synthetic é/😀\b\t\n\f\r\u0001\"\\"
+        ],
+        ["/collectors/0/status", "partial"],
+        ["/collectors/0/omitted_reason", "PermissionDenied"],
+        ["/collectors/0/stop_reason", "PermissionDenied"],
+        ["/summary/status", "partial"],
+        ["/summary/stop_reason", "PermissionDenied"]
+      ],
+      "report_bytes": 5677,
+      "sha256": "557c1664db1829f5bb7956e2d35d3ef62fab77e3544fc378bd5c0c470a167fe2",
+      "manifest_sha256": "f6b7bbd1008f6f05cfda227feb055bfd48d50c001fa3d3c5cb6556969bff5bc7"
+    },
+    {
+      "name": "failed",
+      "status": "failed",
+      "changes": [
+        ["/records", []],
+        ["/summary/accepted_records", 0],
+        ["/collectors/0/accepted_records", 0],
+        ["/endpoint", null],
+        ["/collectors/0/status", "unsupported"],
+        ["/collectors/0/coverage", []],
+        ["/collectors/0/omitted_records", null],
+        ["/collectors/0/omitted_reason", "Unsupported"],
+        ["/collectors/0/stop_reason", "Unsupported"],
+        ["/summary/status", "failed"],
+        ["/summary/stop_reason", "Unsupported"],
+        ["/summary/omitted_unknown", true],
+        ["/summary/worker_cleanup", "not_started"]
+      ],
+      "report_bytes": 2697,
+      "sha256": "1ee3bc3b1d8ea0351ca88b318f9b694831f698ff54b263592ff46ae34b41ba6b",
+      "manifest_sha256": "795d322d5b8daecf45c1ba6662a5f0b71aacaf9ddca533b5d4267ab1270a81c8"
+    }
+  ]
+}

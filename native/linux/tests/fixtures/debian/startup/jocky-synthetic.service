@@ -1,0 +1,4 @@
+[Unit]
+Description=JOCKY synthetic
+[Service]
+ExecStart=/usr/bin/true

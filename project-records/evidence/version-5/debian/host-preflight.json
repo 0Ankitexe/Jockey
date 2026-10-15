@@ -1,0 +1,8 @@
+{
+  "disk_sha256_before_boot": "e87d3615a8924d860418ef29d3d000930ab6198f7f19381dd38279decdaf5920",
+  "inventory_id": "22725580-23a0-4261-99f3-ad7b9f627382",
+  "machine_id": "8eda7802cadd47b48437c16e12730bea",
+  "verified_at": "2026-10-15T22:20:15Z",
+  "vm_name": "jocky-v5-debian-13-7",
+  "vm_product_uuid": "296bba74-2e38-458e-827e-56b7cd858997"
+}

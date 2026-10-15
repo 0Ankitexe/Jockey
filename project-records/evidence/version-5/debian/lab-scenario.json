@@ -1,0 +1,24 @@
+{
+  "allowed_actions": [
+    "create_benign_processes",
+    "bind_loopback_tcp",
+    "create_sample_files",
+    "cleanup_owned_objects",
+    "emit_benign_log_markers"
+  ],
+  "approval_id": "dc2f8b55-a469-4d03-84b9-479eb959dee7",
+  "authorisation_id": "75515e95-f306-49c4-b2bf-a2f89e265022",
+  "case_id": "2c1f188c-eef1-46d8-9be5-95f1c1c64218",
+  "cold_preparation_reference": "shutoff-disk-sha256:e87d3615a8924d860418ef29d3d000930ab6198f7f19381dd38279decdaf5920; preflight:2026-10-15T22:20:15Z",
+  "collector_sha256": "0657b96863be99e4a986864e25b6c2d41603be850d7a84cf212102172e08fbc3",
+  "designation_id": "d2cd2206-116f-42c3-92c6-fc68cc1d0dbc",
+  "endpoint_id": "77dad005-1930-4c68-b499-f8cd4dc058b4",
+  "inventory_id": "22725580-23a0-4261-99f3-ad7b9f627382",
+  "operator_id": "41689e0d-82d2-4857-82af-f56d8d128c4f",
+  "output_root": "/home/jockylab/jocky-t178-output-4",
+  "owned_scratch_root": "/home/jockylab/jocky-t178-scratch-4",
+  "scenario": "lab-small",
+  "schema_version": "1.0.0",
+  "valid_from": "2026-10-15T22:18:15Z",
+  "valid_until": "2026-10-16T01:20:15Z"
+}

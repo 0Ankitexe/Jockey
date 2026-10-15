@@ -1,0 +1,43 @@
+{
+  "collector_exit": 2,
+  "independent_connection": {
+    "local_address": "127.0.0.1",
+    "local_port": 43872,
+    "remote_address": "127.0.0.1",
+    "remote_port": 42695,
+    "socket_inode": "15570"
+  },
+  "independent_file": {
+    "label": "jocky-checkpoint-6przn190/sample.txt",
+    "root_id": "98a0f1d6-d82c-4d15-adbd-f5352abb841a",
+    "sha256": "974ce96b482433df8e92096aab1662a2ada4299ed38d2783ab21ea144e0eade1",
+    "size_bytes": 34
+  },
+  "independent_process": {
+    "boot_id": "b1f6e849-ca4d-4201-afa0-99d589be3338",
+    "pid": 1606,
+    "start_ticks": "61140"
+  },
+  "report": "/home/jockylab/jocky-output/t165-accepted-report.json",
+  "report_sha256": "87d4e779f5aa032baa53b954e55263ebe12084359d62d452d1c7c064a6e98c69",
+  "scenario_approval_id": "ae2a27fa-47d6-441d-8538-ad3b3f3f7f5e",
+  "summary": {
+    "accepted_records": 118,
+    "errors": 110,
+    "omitted_known": 0,
+    "omitted_unknown": false,
+    "report_bytes": 284952,
+    "source_bytes": 190809,
+    "status": "partial",
+    "stop_reason": "PermissionDenied",
+    "work_used": {
+      "entries": 1404,
+      "errors": 320,
+      "indicator_comparisons": 0,
+      "retained_bytes": 39833705,
+      "source_bytes": 190809,
+      "staging_bytes": 0
+    },
+    "worker_cleanup": "complete"
+  }
+}

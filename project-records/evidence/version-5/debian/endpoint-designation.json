@@ -1,0 +1,15 @@
+{
+  "abi": "gnu",
+  "approved_operator_ids": [
+    "41689e0d-82d2-4857-82af-f56d8d128c4f"
+  ],
+  "architecture": "x86_64",
+  "designation_id": "d2cd2206-116f-42c3-92c6-fc68cc1d0dbc",
+  "endpoint_id": "77dad005-1930-4c68-b499-f8cd4dc058b4",
+  "kind": "isolated_vm",
+  "lab_inventory_reference": "/home/zer0/.local/share/jocky-v5-vms/debian-t178-campaign-4/inventory.json",
+  "label": "jocky-debian-lab",
+  "schema_version": "1.0.0",
+  "valid_from": "2026-10-15T22:18:15Z",
+  "valid_until": "2026-10-16T01:20:15Z"
+}

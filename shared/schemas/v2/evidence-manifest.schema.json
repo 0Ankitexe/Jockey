@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/v2/evidence-manifest.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "manifest_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "context": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/LocalContext"
+    },
+    "created_at": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/TimeObservation"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9999
+          },
+          "byte_length": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 98304
+          },
+          "sha256": {
+            "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+          }
+        },
+        "required": [
+          "record_id",
+          "sequence",
+          "byte_length",
+          "sha256"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 10000
+    },
+    "content_sha256": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+    }
+  },
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "context",
+    "created_at",
+    "entries",
+    "content_sha256"
+  ],
+  "additionalProperties": false
+}

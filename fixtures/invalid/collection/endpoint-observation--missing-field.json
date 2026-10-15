@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "os_family": "linux",
+  "architecture": {
+    "state": "available",
+    "value": "x86_64"
+  },
+  "distribution": {
+    "id": {
+      "state": "available",
+      "value": "synthetic"
+    },
+    "version": {
+      "state": "available",
+      "value": "0"
+    }
+  },
+  "kernel_release": {
+    "state": "available",
+    "value": "synthetic-kernel"
+  },
+  "abi": {
+    "state": "available",
+    "value": "gnu"
+  },
+  "namespace_scope": "current",
+  "observed_at": {
+    "value": "2020-01-01T00:00:00Z",
+    "basis": "local_clock",
+    "uncertainty_ms": null,
+    "clock_uncertain": false
+  },
+  "facilities": [
+    {
+      "source_id": "10000000-0000-4000-8000-000000000008",
+      "state": "supported",
+      "reason": null
+    }
+  ]
+}

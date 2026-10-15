@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1/status.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "code": {
+      "type": "string",
+      "enum": [
+        "InvalidInput",
+        "UnsupportedVersion",
+        "MissingAuthorisation",
+        "AuthorisationDenied",
+        "AuthorisationExpired",
+        "ScopeDenied",
+        "PermissionDenied",
+        "Unsupported",
+        "NotImplemented",
+        "NotFound",
+        "FacilityUnavailable",
+        "UnsupportedFormat",
+        "UnsupportedEncoding",
+        "UnknownTimezone",
+        "MalformedSource",
+        "SourceChanged",
+        "SourceDisappeared",
+        "AmbiguousOwner",
+        "ResourceLimit",
+        "Timeout",
+        "Cancelled",
+        "ClockUncertain",
+        "WorkerProtocol",
+        "WorkerFailed",
+        "PublicationFailed",
+        "OutputExists",
+        "AliasDenied",
+        "CleanupIncomplete",
+        "NotRequested",
+        "Help",
+        "Version",
+        "InputsValid",
+        "ReportValid",
+        "PublishedComplete",
+        "PublishedPartial",
+        "PublishedFailed"
+      ]
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "arguments",
+        "configuration",
+        "validation",
+        "admission",
+        "collection",
+        "finalization",
+        "publication",
+        "verification",
+        "build"
+      ]
+    },
+    "collection_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "endpoint_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "case_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "report_digest": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+    },
+    "byte_length": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10485760
+    },
+    "residue_ordinal": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20000
+    }
+  },
+  "required": [
+    "schema_version",
+    "code",
+    "stage"
+  ],
+  "additionalProperties": false,
+  "dependentRequired": {
+    "report_digest": [
+      "byte_length"
+    ],
+    "byte_length": [
+      "report_digest"
+    ]
+  },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          {
+            "required": [
+              "report_digest"
+            ]
+          },
+          {
+            "required": [
+              "byte_length"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "PublishedComplete",
+              "PublishedPartial",
+              "PublishedFailed"
+            ]
+          }
+        },
+        "required": [
+          "collection_id",
+          "endpoint_id",
+          "case_id"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "PublishedComplete",
+              "PublishedPartial",
+              "PublishedFailed"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "report_digest",
+          "byte_length",
+          "collection_id",
+          "endpoint_id",
+          "case_id"
+        ]
+      }
+    }
+  ]
+}

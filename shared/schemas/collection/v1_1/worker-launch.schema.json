@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1_1/worker-launch.schema.json",
+  "title": "WorkerLaunch 1.1.0 — local metadata, not execution authority",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.1.0" },
+    "worker_schema_version": { "const": "1.0.0" },
+    "collection_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "job": { "enum": ["collect", "publish"] },
+    "clock_basis": { "const": "linux_clock_monotonic" },
+    "invocation_origin": { "$ref": "#/$defs/Clock" },
+    "launch_observed": { "$ref": "#/$defs/Clock" },
+    "parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pid": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+        "uid": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "start_ticks": { "$ref": "#/$defs/U64" }
+      },
+      "required": ["pid", "uid", "start_ticks"]
+    },
+    "start_sha256": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+    },
+    "record_base": { "type": "integer", "minimum": 0, "maximum": 10000 },
+    "error_base": { "type": "integer", "minimum": 0, "maximum": 1000 },
+    "global_limits": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Limits"
+    },
+    "allowance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "records": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "report_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10485760
+        },
+        "source_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 67108864
+        },
+        "errors": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "entries": { "type": "integer", "minimum": 0, "maximum": 20000 },
+        "indicator_comparisons": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "staging_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 83886080
+        },
+        "retained_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 268435456
+        }
+      },
+      "required": [
+        "records",
+        "report_bytes",
+        "source_bytes",
+        "errors",
+        "entries",
+        "indicator_comparisons",
+        "staging_bytes",
+        "retained_bytes"
+      ]
+    },
+    "descriptors": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "ordinary_root",
+              "proc_mount",
+              "sys_mount",
+              "os_release",
+              "os_release_fallback",
+              "systemd_socket",
+              "output_directory"
+            ]
+          },
+          "subject_id": {
+            "anyOf": [
+              {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+              },
+              { "type": "null" }
+            ]
+          },
+          "fd": { "type": "integer", "minimum": 3, "maximum": 1023 },
+          "object": { "$ref": "#/$defs/Object" }
+        },
+        "required": ["kind", "subject_id", "fd", "object"]
+      }
+    },
+    "config_exclusions": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/Object" }
+    }
+  },
+  "required": [
+    "schema_version",
+    "worker_schema_version",
+    "collection_id",
+    "job",
+    "clock_basis",
+    "invocation_origin",
+    "launch_observed",
+    "parent",
+    "start_sha256",
+    "record_base",
+    "error_base",
+    "global_limits",
+    "allowance",
+    "descriptors",
+    "config_exclusions"
+  ],
+  "$defs": {
+    "U64": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20,
+      "pattern": "^(0|[1-9][0-9]{0,19})$"
+    },
+    "Clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "utc": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Utc"
+        },
+        "monotonic_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["utc", "monotonic_ms"]
+    },
+    "Object": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "device_id": { "$ref": "#/$defs/U64" },
+        "inode": { "$ref": "#/$defs/U64" },
+        "mount_id": { "anyOf": [{ "$ref": "#/$defs/U64" }, { "type": "null" }] }
+      },
+      "required": ["device_id", "inode", "mount_id"]
+    }
+  }
+}

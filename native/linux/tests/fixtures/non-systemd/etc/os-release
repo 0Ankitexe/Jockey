@@ -1,0 +1,3 @@
+ID=alpine-test
+VERSION_ID="1"
+PRETTY_NAME="JOCKY synthetic non-systemd fixture"

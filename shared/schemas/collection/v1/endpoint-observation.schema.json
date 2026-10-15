@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1/endpoint-observation.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "endpoint_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "os_family": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/OsFamily"
+    },
+    "architecture": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+    },
+    "distribution": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+        },
+        "version": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "kernel_release": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+    },
+    "abi": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+    },
+    "namespace_scope": {
+      "const": "current"
+    },
+    "observed_at": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/TimeObservation"
+    },
+    "facilities": {
+      "type": "array",
+      "items": {
+        "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Coverage"
+      },
+      "minItems": 0,
+      "maxItems": 64,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "endpoint_id",
+    "os_family",
+    "architecture",
+    "distribution",
+    "kernel_release",
+    "abi",
+    "namespace_scope",
+    "observed_at",
+    "facilities"
+  ],
+  "additionalProperties": false
+}

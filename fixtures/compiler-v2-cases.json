@@ -1,0 +1,131 @@
+{
+  "cases": [
+    {
+      "schema": "portable-ast",
+      "file": "fixtures/valid/compiler-v2/portable-ast-linux.json",
+      "valid": true
+    },
+    {
+      "schema": "portable-ast",
+      "file": "fixtures/invalid/compiler-v2/portable-ast-unknown-version.json",
+      "valid": false,
+      "reason": "const"
+    },
+    {
+      "schema": "portable-ast",
+      "file": "fixtures/invalid/compiler-v2/portable-ast-unknown-target.json",
+      "valid": false,
+      "reason": "oneOf"
+    },
+    {
+      "schema": "portable-ast",
+      "file": "fixtures/invalid/compiler-v2/portable-ast-mixed-reversed.json",
+      "valid": false,
+      "reason": "oneOf"
+    },
+    {
+      "schema": "portable-ast",
+      "file": "fixtures/invalid/compiler-v2/portable-ast-unknown-field.json",
+      "valid": false,
+      "reason": "additionalProperties"
+    },
+    {
+      "schema": "compiler-types-v2",
+      "file": "fixtures/valid/compiler-v2/compiler-types-v2-type.json",
+      "valid": true
+    },
+    {
+      "schema": "compiler-types-v2",
+      "file": "fixtures/invalid/compiler-v2/compiler-types-v2-future-type.json",
+      "valid": false,
+      "reason": "enum"
+    },
+    {
+      "schema": "compiler-types-v2",
+      "file": "fixtures/invalid/compiler-v2/compiler-types-v2-open-type.json",
+      "valid": false,
+      "reason": "additionalProperties"
+    },
+    {
+      "schema": "module-registry-v2",
+      "file": "fixtures/valid/compiler-v2/module-registry-v2-portable.json",
+      "valid": true
+    },
+    {
+      "schema": "module-registry-v2",
+      "file": "fixtures/invalid/compiler-v2/module-registry-v2-legacy-version.json",
+      "valid": false,
+      "reason": "const"
+    },
+    {
+      "schema": "module-registry-v2",
+      "file": "fixtures/invalid/compiler-v2/module-registry-v2-unknown-selector.json",
+      "valid": false,
+      "reason": "oneOf"
+    },
+    {
+      "schema": "module-registry-v2",
+      "file": "fixtures/invalid/compiler-v2/module-registry-v2-open-function.json",
+      "valid": false,
+      "reason": "additionalProperties"
+    },
+    {
+      "schema": "check-report-v2",
+      "file": "fixtures/valid/compiler-v2/check-report-v2-valid.json",
+      "valid": true
+    },
+    {
+      "schema": "check-report-v2",
+      "file": "fixtures/invalid/compiler-v2/check-report-v2-wrong-language.json",
+      "valid": false,
+      "reason": "const"
+    },
+    {
+      "schema": "check-report-v2",
+      "file": "fixtures/invalid/compiler-v2/check-report-v2-missing-fingerprint.json",
+      "valid": false,
+      "reason": "required"
+    },
+    {
+      "schema": "check-report-v2",
+      "file": "fixtures/invalid/compiler-v2/check-report-v2-open-report.json",
+      "valid": false,
+      "reason": "additionalProperties"
+    },
+    {
+      "schema": "ir-v2",
+      "file": "fixtures/valid/compiler-v2/ir-v2-structural.json",
+      "valid": true
+    },
+    {
+      "schema": "ir-v2",
+      "file": "fixtures/invalid/compiler-v2/ir-v2-legacy-language.json",
+      "valid": false,
+      "reason": "const"
+    },
+    {
+      "schema": "ir-v2",
+      "file": "fixtures/invalid/compiler-v2/ir-v2-legacy-registry.json",
+      "valid": false,
+      "reason": "const"
+    },
+    {
+      "schema": "ir-v2",
+      "file": "fixtures/invalid/compiler-v2/ir-v2-bad-identity.json",
+      "valid": false,
+      "reason": "pattern"
+    },
+    {
+      "schema": "ir-v2",
+      "file": "fixtures/invalid/compiler-v2/ir-v2-open-ir.json",
+      "valid": false,
+      "reason": "additionalProperties"
+    },
+    {
+      "schema": "ir-v2",
+      "file": "fixtures/invalid/compiler-v2/ir-v2-three-source-targets.json",
+      "valid": false,
+      "reason": "oneOf"
+    }
+  ]
+}

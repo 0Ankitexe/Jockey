@@ -1,0 +1,975 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "record_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "context": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/LocalContext"
+    },
+    "collected_at": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/TimeObservation"
+    },
+    "collector": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Collector"
+        },
+        "version": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Semver"
+        },
+        "adapter": {
+          "type": "string",
+          "enum": [
+            "linux.kernel-profile-v1",
+            "linux.proc-processes-v1",
+            "linux.proc-net-v1",
+            "linux.systemd-v1",
+            "linux.startup-v1",
+            "linux.scoped-file-v1",
+            "linux.journal-v1",
+            "linux.rfc5424-v1",
+            "linux.modules-v1",
+            "pure.exact-indicators-v1"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "adapter"
+      ],
+      "additionalProperties": false
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "system",
+        "process",
+        "network",
+        "file",
+        "event",
+        "persistence",
+        "driver",
+        "indicator"
+      ]
+    },
+    "severity": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Severity"
+    },
+    "record_type": {
+      "type": "string",
+      "enum": [
+        "profile",
+        "process",
+        "service",
+        "connection",
+        "entry",
+        "metadata",
+        "log",
+        "module",
+        "match"
+      ]
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9999
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+        },
+        "source_kind": {
+          "type": "string",
+          "enum": [
+            "kernel_profile",
+            "proc_processes",
+            "proc_net",
+            "sys_modules",
+            "systemd_bus",
+            "journal_file",
+            "text_log",
+            "startup_directory",
+            "scoped_file",
+            "supplied_indicator_set"
+          ]
+        },
+        "observed_start": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/TimeObservation"
+        },
+        "observed_end": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/TimeObservation"
+        },
+        "policy_sha256": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+        },
+        "authorisation_sha256": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+        },
+        "request_sha256": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+        },
+        "source_scope": {
+          "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/SourceScope"
+        },
+        "indicator_set_sha256": {
+          "anyOf": [
+            {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rules_version": {
+          "anyOf": [
+            {
+              "const": "exact-v1"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "source_id",
+        "source_kind",
+        "observed_start",
+        "observed_end",
+        "policy_sha256",
+        "authorisation_sha256",
+        "request_sha256",
+        "source_scope",
+        "indicator_set_sha256",
+        "rules_version"
+      ],
+      "additionalProperties": false
+    },
+    "payload": {},
+    "details": {
+      "type": "object",
+      "properties": {
+        "linux": {
+          "type": "object",
+          "properties": {
+            "boot_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "start_ticks": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "clock_ticks_per_second": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "device_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "inode": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "socket_inode": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "namespace_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "unit_path": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "journal_cursor": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "journal_boot_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            },
+            "mount_type": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 4096,
+                  "pattern": "^[^\\u0000]*$"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false,
+          "maxProperties": 16
+        }
+      },
+      "required": [
+        "linux"
+      ],
+      "additionalProperties": false
+    },
+    "content_sha256": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_id",
+    "context",
+    "collected_at",
+    "collector",
+    "category",
+    "severity",
+    "record_type",
+    "sequence",
+    "provenance",
+    "payload",
+    "details",
+    "content_sha256"
+  ],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "record_type": {
+          "const": "profile"
+        },
+        "category": {
+          "const": "system"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "os_family": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/OsFamily"
+            },
+            "kernel_release": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "kernel_version": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "architecture": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "hostname": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "distribution_id": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "distribution_version": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "boot_id": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldUuid"
+            }
+          },
+          "required": [
+            "os_family",
+            "kernel_release",
+            "kernel_version",
+            "architecture",
+            "hostname",
+            "distribution_id",
+            "distribution_version",
+            "boot_id"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "process"
+        },
+        "category": {
+          "const": "process"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "pid": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "parent_pid": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "uid": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "command": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "executable": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "start_identity": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "available"
+                    },
+                    "value": {
+                      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/ProcessIdentity"
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "unavailable"
+                    },
+                    "reason": {
+                      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Code"
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "pid",
+            "parent_pid",
+            "uid",
+            "command",
+            "executable",
+            "start_identity"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "service"
+        },
+        "category": {
+          "const": "system"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "unit_name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "pattern": "^[^\\u0000]*$"
+            },
+            "description": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "load_state": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "active_state": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "sub_state": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "unit_file_state": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            }
+          },
+          "required": [
+            "unit_name",
+            "description",
+            "load_state",
+            "active_state",
+            "sub_state",
+            "unit_file_state"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "connection"
+        },
+        "category": {
+          "const": "network"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "tcp",
+                "udp"
+              ]
+            },
+            "family": {
+              "type": "string",
+              "enum": [
+                "ipv4",
+                "ipv6"
+              ]
+            },
+            "local_address": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/IpAddress"
+            },
+            "local_port": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "remote_address": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/IpAddress"
+            },
+            "remote_port": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            },
+            "state": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[^\\u0000]*$"
+            },
+            "uid": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "socket_inode": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]{0,19})$"
+            },
+            "owners": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "available"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/ProcessIdentity"
+                      },
+                      "minItems": 0,
+                      "maxItems": 10000,
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "unavailable"
+                    },
+                    "reason": {
+                      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Code"
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "namespace": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            }
+          },
+          "required": [
+            "protocol",
+            "family",
+            "local_address",
+            "local_port",
+            "remote_address",
+            "remote_port",
+            "state",
+            "uid",
+            "socket_inode",
+            "owners",
+            "namespace"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "entry"
+        },
+        "category": {
+          "const": "persistence"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "systemd_units",
+                "systemd_timers",
+                "cron",
+                "autostart"
+              ]
+            },
+            "location": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/PathRef"
+            },
+            "enabled_state": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "referenced_targets": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "available"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 0,
+                        "maxLength": 4096,
+                        "pattern": "^[^\\u0000]*$"
+                      },
+                      "minItems": 0,
+                      "maxItems": 256
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "unavailable"
+                    },
+                    "reason": {
+                      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Code"
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "content_sha256": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldDigest"
+            }
+          },
+          "required": [
+            "kind",
+            "location",
+            "enabled_state",
+            "referenced_targets",
+            "content_sha256"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "metadata"
+        },
+        "category": {
+          "const": "file"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/PathRef"
+            },
+            "size_bytes": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "mode": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "uid": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "gid": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "mtime": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldUtc"
+            },
+            "ctime": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldUtc"
+            },
+            "sha256": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldDigest"
+            },
+            "read_stability": {
+              "type": "string",
+              "enum": [
+                "stable_observed",
+                "changed",
+                "not_read"
+              ]
+            }
+          },
+          "required": [
+            "location",
+            "size_bytes",
+            "mode",
+            "uid",
+            "gid",
+            "mtime",
+            "ctime",
+            "sha256",
+            "read_stability"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "log"
+        },
+        "category": {
+          "const": "event"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "source_id": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+            },
+            "event_time": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldUtc"
+            },
+            "time_basis": {
+              "type": "string",
+              "enum": [
+                "source_utc",
+                "source_offset"
+              ]
+            },
+            "severity": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "message": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 65536,
+              "pattern": "^[^\\u0000]*$"
+            },
+            "domain": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "available"
+                    },
+                    "value": {
+                      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Domain"
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": {
+                      "const": "unavailable"
+                    },
+                    "reason": {
+                      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Code"
+                    }
+                  },
+                  "required": [
+                    "state",
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "source_id",
+            "event_time",
+            "time_basis",
+            "severity",
+            "message",
+            "domain"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "module"
+        },
+        "category": {
+          "const": "driver"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256,
+              "pattern": "^[^\\u0000]*$"
+            },
+            "size_bytes": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "reference_count": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldCount"
+            },
+            "state": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[^\\u0000]*$"
+            },
+            "version": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            },
+            "source_version": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldText"
+            }
+          },
+          "required": [
+            "name",
+            "size_bytes",
+            "reference_count",
+            "state",
+            "version",
+            "source_version"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "record_type": {
+          "const": "match"
+        },
+        "category": {
+          "const": "indicator"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "indicator_id": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+            },
+            "indicator_set_id": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+            },
+            "rules_version": {
+              "const": "exact-v1"
+            },
+            "matched_record_id": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+            },
+            "field_path": {
+              "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/FieldPath"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "sha256",
+                "path",
+                "ip_address",
+                "domain"
+              ]
+            }
+          },
+          "required": [
+            "indicator_id",
+            "indicator_set_id",
+            "rules_version",
+            "matched_record_id",
+            "field_path",
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Synthetic offline launch metadata only; never authority or a real process identity.",
+  "cases": [
+    {
+      "file": "fixtures/valid/collection/worker-launch.json",
+      "valid": true,
+      "reason": null
+    },
+    {
+      "file": "fixtures/invalid/collection/worker-launch--missing-identifiers.json",
+      "valid": false,
+      "reason": "Schema"
+    },
+    {
+      "file": "fixtures/valid/collection/worker.json",
+      "valid": false,
+      "reason": "Version"
+    }
+  ]
+}

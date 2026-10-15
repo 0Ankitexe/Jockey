@@ -1,0 +1,12 @@
+{
+  "architecture": "x86_64",
+  "disk_image_path": "/home/zer0/.local/share/jocky-v5-vms/jocky-v5-debian-13-7.qcow2",
+  "disk_sha256_before_boot": "4d993364937e366cf98767a22340ab05cc3821c86048effe79b4fe258dd95d2d",
+  "distribution_id": "debian",
+  "endpoint_id": "77dad005-1930-4c68-b499-f8cd4dc058b4",
+  "inventory_id": "ea2f7e37-af2c-4411-92fe-d6fe8b2c40f1",
+  "kind": "isolated_vm",
+  "machine_id": "8eda7802cadd47b48437c16e12730bea",
+  "vm_name": "jocky-v5-debian-13-7",
+  "vm_product_uuid": "296bba74-2e38-458e-827e-56b7cd858997"
+}

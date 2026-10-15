@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0.0",
+  "code": "MissingAuthorisation",
+  "stage": "configuration",
+  "report_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "byte_length": 1
+}

@@ -1,0 +1,81 @@
+{
+  "approved_profile": "lab-small-v1",
+  "endpoint_id": "77dad005-1930-4c68-b499-f8cd4dc058b4",
+  "limits": {
+    "max_depth": 16,
+    "max_entries": 20000,
+    "max_errors": 1000,
+    "max_file_bytes": 16777216,
+    "max_indicator_comparisons": 10000000,
+    "max_item_bytes": 65536,
+    "max_memory_bytes": 268435456,
+    "max_records": 10000,
+    "max_report_bytes": 10485760,
+    "max_source_bytes": 67108864,
+    "max_staging_bytes": 83886080,
+    "operation_timeout_ms": 2000,
+    "timeout_ms": 60000
+  },
+  "policy_id": "c5a56fc2-38a6-4b49-8782-c25aa957f646",
+  "schema_version": "1.0.0",
+  "scope": {
+    "capabilities": [
+      "system",
+      "processes",
+      "network",
+      "files",
+      "events",
+      "indicators"
+    ],
+    "event_window": {
+      "end": "2026-10-16T01:20:15Z",
+      "start": "2026-10-15T22:18:15Z"
+    },
+    "roots": [
+      {
+        "absolute_path": "/home/jockylab/jocky-t178-scratch-4",
+        "purposes": [
+          "files"
+        ],
+        "root_id": "98a0f1d6-d82c-4d15-adbd-f5352abb841a"
+      },
+      {
+        "absolute_path": "/var/log/journal/8eda7802cadd47b48437c16e12730bea",
+        "purposes": [
+          "journal"
+        ],
+        "root_id": "18882c62-67ee-4ef9-a01d-d5815d13ba6a"
+      }
+    ],
+    "source_groups": [
+      "kernel_profile",
+      "proc_processes",
+      "proc_net",
+      "journal_file"
+    ]
+  },
+  "sources": [
+    {
+      "kind": "kernel_profile",
+      "source_id": "935db04a-d51e-4f23-9ec5-e2d4fa61067b"
+    },
+    {
+      "kind": "proc_processes",
+      "source_id": "bd30f0d3-da72-4b50-b766-1738a3d337b7"
+    },
+    {
+      "kind": "proc_net",
+      "source_id": "9e4a06b6-bfbe-47df-8f6e-8c574178c35a"
+    },
+    {
+      "kind": "journal_file",
+      "path": {
+        "relative_path": "user-1001.journal",
+        "root_id": "18882c62-67ee-4ef9-a01d-d5815d13ba6a"
+      },
+      "source_id": "5e9f6432-721a-409e-a91d-5ea3599255f8"
+    }
+  ],
+  "valid_from": "2026-10-15T22:18:15Z",
+  "valid_until": "2026-10-16T01:20:15Z"
+}

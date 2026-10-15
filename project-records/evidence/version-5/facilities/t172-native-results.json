@@ -1,0 +1,157 @@
+{
+  "approval_id": "61c4d8a7-2d84-45a5-a23d-6cc6b2ac2795",
+  "at": "2026-10-15T13:51:47Z",
+  "binary_sha256": "7acce507f27ae2072436e356f5609809fcfa9d873040f9fb0dbadad8d514de13",
+  "cases": {
+    "journal": {
+      "collector_records": {
+        "events": 781,
+        "system": 1
+      },
+      "errors": [],
+      "exit": 0,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/journal-report.json",
+      "report_bytes": 1653928,
+      "report_sha256": "f83c5e639491239c277f3cef3294110c37484570316874f075ffd635db3aceaf",
+      "stop_reason": null,
+      "summary_status": "complete"
+    },
+    "modules": {
+      "collector_records": {
+        "drivers": 73,
+        "system": 1
+      },
+      "errors": [],
+      "exit": 2,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/modules-report.json",
+      "report_bytes": 154907,
+      "report_sha256": "f9fda084aaf446ab8aba5ac9e054082275e93fb134fd4f137e7aa9cda6a138d9",
+      "stop_reason": "NotFound",
+      "summary_status": "partial"
+    },
+    "persistence": {
+      "collector_records": {
+        "persistence": 4,
+        "system": 1
+      },
+      "errors": [],
+      "exit": 0,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/persistence-report.json",
+      "report_bytes": 15373,
+      "report_sha256": "26adf822afdf62b5afec6c7347f0cfff7d7da3d0e43bf397c682e7cfaa0aafdc",
+      "stop_reason": null,
+      "summary_status": "complete"
+    },
+    "persistence_denied": {
+      "collector_records": {
+        "persistence": 3
+      },
+      "errors": [
+        {
+          "code": "PermissionDenied",
+          "collector": "persistence",
+          "source_id": "8cdabd9b-c091-47c7-a673-8894dfcd4a37"
+        }
+      ],
+      "exit": 2,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/persistence_denied-report.json",
+      "report_bytes": 13523,
+      "report_sha256": "d232c0e2c04c09c7a232dcbb2b5a97fb3f8d26fb2e157da1f7ab5503e22f347f",
+      "stop_reason": "PermissionDenied",
+      "summary_status": "partial"
+    },
+    "persistence_missing": {
+      "collector_records": {
+        "persistence": 3
+      },
+      "errors": [
+        {
+          "code": "NotFound",
+          "collector": "persistence",
+          "source_id": "e7cf619f-c3e0-41dc-949c-9778d7053874"
+        }
+      ],
+      "exit": 2,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/persistence_missing-report.json",
+      "report_bytes": 13443,
+      "report_sha256": "10a1b5bfe6aa6b7a74682037a0e79d52dd26effd56568c79b4e6a45615b9b725",
+      "stop_reason": "NotFound",
+      "summary_status": "partial"
+    },
+    "service": {
+      "collector_records": {
+        "services": 92,
+        "system": 1
+      },
+      "errors": [],
+      "exit": 2,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/service-report.json",
+      "report_bytes": 201812,
+      "report_sha256": "e39fde5a3c027b982627a4b8bb6dbe5bed601dfb692dff7a43c9edfbb4101f1c",
+      "stop_reason": "MalformedSource",
+      "summary_status": "partial"
+    },
+    "text": {
+      "collector_records": {
+        "events": 20,
+        "system": 1
+      },
+      "errors": [],
+      "exit": 0,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/text-report.json",
+      "report_bytes": 48189,
+      "report_sha256": "7ac361e4609423a400fe9107ee0185838e3f10c10fa52faf3284b3aafae60a2e",
+      "stop_reason": null,
+      "summary_status": "complete"
+    },
+    "text_denied": {
+      "collector_records": {
+        "events": 10
+      },
+      "errors": [
+        {
+          "code": "PermissionDenied",
+          "collector": "events",
+          "source_id": "bf267f10-407f-4c26-adc2-60eab31b7ff2"
+        }
+      ],
+      "exit": 2,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/text_denied-report.json",
+      "report_bytes": 27577,
+      "report_sha256": "f5c654146c78774fd278a6397845adcddfea9df476f8d1159b0f4473e54b3146",
+      "stop_reason": "PermissionDenied",
+      "summary_status": "partial"
+    },
+    "text_empty": {
+      "collector_records": {
+        "events": 10
+      },
+      "errors": [],
+      "exit": 0,
+      "private_report_path": "/home/zer0/.local/share/jocky-v5-vms/debian-t172-facilities/reports/text_empty-report.json",
+      "report_bytes": 27269,
+      "report_sha256": "6350f40dd72f8aadb9bb7ff7eee6ea75dd4c5320d2688c70e48834645bd215cd",
+      "stop_reason": null,
+      "summary_status": "complete"
+    }
+  },
+  "distribution": "Debian 13.7",
+  "independent_modules_sha256": "f0872f5377411e735efde095f81a647e5189f340e247d7d9c6b0ddc9a69f532f",
+  "inventory_id": "8ad1b881-5df7-4b33-8103-13b23bc29994",
+  "schema_version": "1.0.0",
+  "service_expected": {
+    "code": 0,
+    "fields": [
+      "Id=dbus.service",
+      "LoadState=loaded",
+      "ActiveState=active"
+    ]
+  },
+  "startup_expected_sha256": {
+    "autostart/jocky-demo.desktop": "f57d4bac74f7170a3dedafe19f5cbb979a3e9fce924767227ac9f8b74793b1ae",
+    "cron/jocky-demo.cron": "1fffdc3081b2630f39d2d2deee25094b6f6561432ac96e8c3d459741da48db5d",
+    "timers/jocky-demo.timer": "5f133c0a342e8dd8660403e760a9ff1d8668bd937a3eceb2b7e30be69e380ab5",
+    "units/jocky-demo.service": "04dfdeacd79d0bb3766df468a1de4756484327e70297f838c5ea8a32c5f9edd2"
+  },
+  "vm": "jocky-v5-debian-13-7"
+}

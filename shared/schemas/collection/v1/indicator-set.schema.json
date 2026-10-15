@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jocky.dev/schemas/collection/v1/indicator-set.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "indicator_set_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "case_id": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+    },
+    "revision": {
+      "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Label"
+    },
+    "rules_version": {
+      "const": "exact-v1"
+    },
+    "indicators": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "indicator_id": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+              },
+              "kind": {
+                "const": "sha256"
+              },
+              "value": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Digest"
+              }
+            },
+            "required": [
+              "indicator_id",
+              "kind",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "indicator_id": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+              },
+              "kind": {
+                "const": "path"
+              },
+              "value": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/PathRef"
+              }
+            },
+            "required": [
+              "indicator_id",
+              "kind",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "indicator_id": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+              },
+              "kind": {
+                "const": "ip_address"
+              },
+              "value": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/IpAddress"
+              }
+            },
+            "required": [
+              "indicator_id",
+              "kind",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "indicator_id": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Uuid"
+              },
+              "kind": {
+                "const": "domain"
+              },
+              "value": {
+                "$ref": "https://jocky.dev/schemas/collection/v1/types.schema.json#/$defs/Domain"
+              }
+            },
+            "required": [
+              "indicator_id",
+              "kind",
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 1000,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "indicator_set_id",
+    "case_id",
+    "revision",
+    "rules_version",
+    "indicators"
+  ],
+  "additionalProperties": false
+}

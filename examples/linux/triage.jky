@@ -1,0 +1,9 @@
+module linux_triage
+target linux
+fn inspect(target: endpoint) -> forensic_result {
+    let system = forensic.system.profile(target)
+    forensic.process.list(target)
+    forensic.network.connections(target)
+    return system
+}
+run inspect on selected_endpoints

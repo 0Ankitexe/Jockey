@@ -1,0 +1,9 @@
+module ubuntu_specific
+target ubuntu
+fn inspect_journal(target: endpoint, start_time: timestamp, end_time: timestamp, max_events: int) -> list<event_record> {
+    return forensic.event.ubuntu_journal(target, start_time, end_time, max_events)
+}
+fn entry(target: endpoint) -> forensic_result {
+    return forensic.system.profile(target)
+}
+run entry on selected_endpoints

@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "designation_id": "10000000-0000-4000-8000-000000000001",
+  "endpoint_id": "10000000-0000-4000-8000-000000000002",
+  "kind": "isolated_vm",
+  "label": "synthetic-test-only",
+  "architecture": "x86_64",
+  "abi": "gnu",
+  "approved_operator_ids": [
+    "10000000-0000-4000-8000-000000000003"
+  ],
+  "valid_from": "2020-01-01T00:00:00Z",
+  "valid_until": "2020-02-30T00:00:00Z",
+  "lab_inventory_reference": "synthetic-test-only-not-an-endpoint-designation"
+}

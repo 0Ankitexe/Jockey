@@ -1,0 +1,217 @@
+{
+  "schema_version": "jocky-v5-offline-cases-1",
+  "evidence_kind": "synthetic_test",
+  "cases": [
+    {
+      "id": "debian-13.7",
+      "root": "debian",
+      "distribution_id": "debian",
+      "distribution_version": "13.7",
+      "init": "systemd",
+      "available": [
+        "etc/os-release",
+        "proc/version",
+        "proc/uptime",
+        "proc/4242/stat",
+        "proc/4242/status",
+        "proc/net/tcp",
+        "service-unit.json",
+        "startup/jocky-synthetic.service",
+        "logs/jocky-synthetic.log",
+        "proc/modules"
+      ],
+      "facilities": {
+        "service": "service-unit.json",
+        "startup": "startup/jocky-synthetic.service",
+        "startup_format": "systemd_units",
+        "log": "logs/jocky-synthetic.log",
+        "module": "proc/modules"
+      }
+    },
+    {
+      "id": "ubuntu-24.04.5",
+      "root": "ubuntu",
+      "distribution_id": "ubuntu",
+      "distribution_version": "24.04",
+      "init": "systemd",
+      "available": [
+        "etc/os-release",
+        "proc/version",
+        "proc/uptime",
+        "proc/4242/stat",
+        "proc/4242/status",
+        "proc/net/tcp",
+        "service-unit.json",
+        "startup/jocky-synthetic.timer",
+        "logs/jocky-synthetic.log",
+        "proc/modules"
+      ],
+      "facilities": {
+        "service": "service-unit.json",
+        "startup": "startup/jocky-synthetic.timer",
+        "startup_format": "systemd_timers",
+        "log": "logs/jocky-synthetic.log",
+        "module": "proc/modules"
+      }
+    },
+    {
+      "id": "fedora-44",
+      "root": "fedora",
+      "distribution_id": "fedora",
+      "distribution_version": "44",
+      "init": "systemd",
+      "available": [
+        "etc/os-release",
+        "proc/version",
+        "proc/uptime",
+        "proc/4242/stat",
+        "proc/4242/status",
+        "proc/net/tcp",
+        "service-unit.json",
+        "startup/jocky-synthetic.cron",
+        "logs/jocky-synthetic.log",
+        "proc/modules"
+      ],
+      "facilities": {
+        "service": "service-unit.json",
+        "startup": "startup/jocky-synthetic.cron",
+        "startup_format": "cron",
+        "log": "logs/jocky-synthetic.log",
+        "module": "proc/modules"
+      }
+    },
+    {
+      "id": "arch-2026.10.01",
+      "root": "arch",
+      "distribution_id": "arch",
+      "distribution_version": "rolling",
+      "init": "systemd",
+      "available": [
+        "etc/os-release",
+        "proc/version",
+        "proc/uptime",
+        "proc/4242/stat",
+        "proc/4242/status",
+        "proc/net/tcp",
+        "service-unit.json",
+        "startup/jocky-synthetic.desktop",
+        "logs/jocky-synthetic.log",
+        "proc/modules"
+      ],
+      "facilities": {
+        "service": "service-unit.json",
+        "startup": "startup/jocky-synthetic.desktop",
+        "startup_format": "autostart",
+        "log": "logs/jocky-synthetic.log",
+        "module": "proc/modules"
+      }
+    },
+    {
+      "id": "missing-procfs",
+      "root": "missing-procfs",
+      "distribution_id": "debian",
+      "distribution_version": "13.7",
+      "init": "systemd",
+      "available": [
+        "etc/os-release"
+      ],
+      "faults": [
+        {
+          "path": "proc",
+          "at": "open",
+          "code": "FacilityUnavailable"
+        }
+      ],
+      "facility_fault": {
+        "path": "proc/modules",
+        "code": "FacilityUnavailable"
+      }
+    },
+    {
+      "id": "non-systemd",
+      "root": "non-systemd",
+      "distribution_id": "alpine-test",
+      "distribution_version": "1",
+      "init": "other",
+      "available": [
+        "etc/os-release",
+        "proc/version"
+      ],
+      "faults": [
+        {
+          "path": "run/dbus/system_bus_socket",
+          "at": "open",
+          "code": "Unsupported"
+        }
+      ],
+      "facility_fault": {
+        "path": "run/dbus/system_bus_socket",
+        "code": "Unsupported"
+      }
+    },
+    {
+      "id": "malformed-source",
+      "root": "malformed",
+      "distribution_id": null,
+      "distribution_version": null,
+      "init": "unknown",
+      "available": [
+        "etc/os-release",
+        "proc/4242/stat"
+      ],
+      "faults": [
+        {
+          "path": "proc/4242/stat",
+          "at": "parse",
+          "code": "UnsupportedFormat"
+        }
+      ],
+      "facility_fault": {
+        "path": "logs/jocky-synthetic.log",
+        "code": "UnsupportedFormat"
+      }
+    },
+    {
+      "id": "permission-denied",
+      "root": "debian",
+      "distribution_id": "debian",
+      "distribution_version": "13.7",
+      "init": "systemd",
+      "available": [
+        "etc/os-release"
+      ],
+      "faults": [
+        {
+          "path": "proc/4242/status",
+          "at": "open",
+          "code": "PermissionDenied"
+        }
+      ],
+      "facility_fault": {
+        "path": "logs/jocky-synthetic.log",
+        "code": "PermissionDenied"
+      }
+    },
+    {
+      "id": "identity-race",
+      "root": "debian",
+      "distribution_id": "debian",
+      "distribution_version": "13.7",
+      "init": "systemd",
+      "available": [
+        "etc/os-release"
+      ],
+      "faults": [
+        {
+          "path": "proc/4242/stat",
+          "at": "after_read",
+          "code": "SourceChanged"
+        }
+      ],
+      "facility_fault": {
+        "path": "startup/jocky-synthetic.service",
+        "code": "SourceChanged"
+      }
+    }
+  ]
+}

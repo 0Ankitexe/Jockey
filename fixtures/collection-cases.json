@@ -1,0 +1,713 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Synthetic offline contract cases only; all authority expired in 2020. A schema pass is not authority or an integrity verification.",
+  "cases": [
+    {
+      "file": "fixtures/valid/collection/types.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/endpoint-designation.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/authorisation.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/authorisation--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/authorisation--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/authorisation--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/policy.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/policy.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/policy--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/policy.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/policy--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/policy.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/policy--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/policy.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/request.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/indicator-set.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/indicator-set.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/indicator-set--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/indicator-set.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/indicator-set--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/indicator-set.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/indicator-set--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/indicator-set.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/endpoint-observation.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-observation.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-observation--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-observation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-observation--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-observation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-observation--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-observation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/report.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/report.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/report--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/report.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/report--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/report.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/report--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/report.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/status.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/status.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/status--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/status.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/status--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/status.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/status--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/status.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/worker.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/worker.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/worker--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/worker.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/worker--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/worker.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/worker--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/worker.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/lab-scenario.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/lab-scenario.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/lab-scenario--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/lab-scenario.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/lab-scenario--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/lab-scenario.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/lab-scenario--missing-field.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/lab-scenario.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--missing-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/evidence-manifest.json",
+      "schema": "https://jocky.dev/schemas/v2/evidence-manifest.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/evidence-manifest--unknown-field.json",
+      "schema": "https://jocky.dev/schemas/v2/evidence-manifest.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/evidence-manifest--wrong-version.json",
+      "schema": "https://jocky.dev/schemas/v2/evidence-manifest.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/evidence-manifest--missing-field.json",
+      "schema": "https://jocky.dev/schemas/v2/evidence-manifest.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--nil-id.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "not"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--uppercase-id.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "pattern"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--invalid-calendar.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "format"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--non-utc.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "pattern"
+    },
+    {
+      "file": "fixtures/invalid/collection/endpoint-designation--year-zero.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/endpoint-designation.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "pattern"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--unknown-collector.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "enum"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--empty-files.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "minItems"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--missing-indicator-set.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "type"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--limit-plus-one.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "maximum"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--zero-budget.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "minimum"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--traversal.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "pattern"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--repeated-collector.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "uniqueItems"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--unknown-payload.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--wrong-category.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--unknown-details.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "additionalProperties"
+    },
+    {
+      "file": "fixtures/invalid/collection/status--unpublished-digest.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/status.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "enum"
+    },
+    {
+      "file": "fixtures/invalid/collection/worker--unknown-kind.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/worker.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "const"
+    },
+    {
+      "file": "fixtures/invalid/collection/authorisation--empty-window.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Timestamp"
+    },
+    {
+      "file": "fixtures/invalid/collection/authorisation--day-plus-nanosecond.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Timestamp"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--collector-order.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Context"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--missing-capability.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Context"
+    },
+    {
+      "file": "fixtures/invalid/collection/request--path-byte-limit.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/request.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Size"
+    },
+    {
+      "file": "fixtures/invalid/collection/policy--duplicate-source-id.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/policy.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Context"
+    },
+    {
+      "file": "fixtures/invalid/collection/authorisation--overlapping-roots.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Path"
+    },
+    {
+      "file": "fixtures/invalid/collection/authorisation--proc-root.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/authorisation.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Path"
+    },
+    {
+      "file": "fixtures/invalid/collection/indicator-set--duplicate-indicator-id.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/indicator-set.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Identifier"
+    },
+    {
+      "file": "fixtures/invalid/collection/report--cross-context.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/report.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Context"
+    },
+    {
+      "file": "fixtures/invalid/collection/lab-scenario--overlapping-output.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/lab-scenario.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Path"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--duplicate-key.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "DuplicateKey"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--fraction.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Number"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--exponent.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Number"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--negative-zero.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Number"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--unsafe-integer.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Number"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--bom.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Json"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--trailing.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Json"
+    },
+    {
+      "file": "fixtures/invalid/collection/types--depth.json",
+      "schema": "https://jocky.dev/schemas/collection/v1/types.schema.json",
+      "valid": false,
+      "stage": "decode",
+      "reason": "Depth"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--process.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--process--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--service.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--service--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--connection.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--connection--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--entry.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--entry--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--metadata.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--metadata--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--log.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--log--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--module.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--module--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    },
+    {
+      "file": "fixtures/valid/collection/forensic-record--match.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": true,
+      "stage": "schema"
+    },
+    {
+      "file": "fixtures/invalid/collection/forensic-record--match--missing-payload-field.json",
+      "schema": "https://jocky.dev/schemas/v2/forensic-record.schema.json",
+      "valid": false,
+      "stage": "schema",
+      "keyword": "required"
+    }
+  ]
+}

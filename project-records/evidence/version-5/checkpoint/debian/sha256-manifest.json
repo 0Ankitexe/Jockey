@@ -1,0 +1,19 @@
+{
+  "README.md": "534a29c75327aaf168777623dd7b8d70962100c7ae404b29dabd1c4f28dd576a",
+  "approval-record.json": "a31689ff25b63dc6ffbfd9cad5a99a56d3c05cd43c4a7b009725a5b51ddb11f6",
+  "authorisation.json": "637ebc424ea74b1a7282f3c737e4204a012877ed9c9695fcc821168ec9252696",
+  "endpoint-designation.json": "9e07a418db031570c62a5176926e8170eef01f12fcaaef584ec891f3bd8186c8",
+  "expected.json": "13691ec5743d6041d1a52f6713b9a7dbeff21667b31677d3494b116bf905edd8",
+  "host-preflight.json": "4878f9fe6815ce11b0a0f91ad11e023b4aad21987be0ecfc897e301a665af1df",
+  "image-verification.txt": "e2d84659ea75b7b892605ab3b35eff48f22fee214985ae0b7e79040dec2ecffc",
+  "installer-SHA256SUMS": "de6d320c52b0fa02787e4a6f58115ace89f821865baaeba86115c723f34cbab4",
+  "installer-SHA256SUMS.sign": "44e770b3d78c23ae581a9c3153d12b948190c1b9dcfc6d64972a192d2c442ca9",
+  "inventory.json": "8f6449f59212cdac333470024d12dc29bd0309ddf08038fa802cdf13614cb69d",
+  "lab-scenario.json": "b5e347e08a207f501782fd7802c6a265ed383ac9e44e2584809d874967b43027",
+  "negative.json": "15062301a27ed052f05c63346c2333eaeac02a0a03e63678018c987369dcc58d",
+  "observed.json": "971abee0a9c8847cb452a3a3d13d45f19cfb4eaf35b3f7fff89d6881115af365",
+  "oracle.json": "b53c40b7562ffb1ef440ebb1569fbf189c8eec6b9a3dbee58a6e2181c7e9e0b8",
+  "policy.json": "fa8061c33fdafa6022f8163e746d37d9860859027518353261d05afdbce80b13",
+  "report.json": "87d4e779f5aa032baa53b954e55263ebe12084359d62d452d1c7c064a6e98c69",
+  "request.json": "b401f7bae916cab017207097a29a8ba20ff060dade878b6ae2f0f42b76fd12d8"
+}

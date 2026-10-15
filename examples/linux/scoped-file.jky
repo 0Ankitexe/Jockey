@@ -1,0 +1,9 @@
+module scoped_file
+target linux
+fn inspect_approved_file(target: endpoint, approved_location: path) -> file_record {
+    return forensic.file.inspect(target, approved_location)
+}
+fn entry(target: endpoint) -> forensic_result {
+    return forensic.system.profile(target)
+}
+run entry on selected_endpoints

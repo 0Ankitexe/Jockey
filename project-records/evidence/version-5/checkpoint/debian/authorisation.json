@@ -1,0 +1,52 @@
+{
+  "approved_profile": "lab-small-v1",
+  "authorisation_id": "bc8a9fa1-3474-4cf5-ba78-ab2548cb7452",
+  "case_id": "2c1f188c-eef1-46d8-9be5-95f1c1c64218",
+  "designation_id": "c8349c0e-7a19-44ee-817e-4657637badbb",
+  "endpoint_id": "77dad005-1930-4c68-b499-f8cd4dc058b4",
+  "limits": {
+    "max_depth": 16,
+    "max_entries": 20000,
+    "max_errors": 1000,
+    "max_file_bytes": 16777216,
+    "max_indicator_comparisons": 10000000,
+    "max_item_bytes": 65536,
+    "max_memory_bytes": 268435456,
+    "max_records": 10000,
+    "max_report_bytes": 10485760,
+    "max_source_bytes": 67108864,
+    "max_staging_bytes": 83886080,
+    "operation_timeout_ms": 2000,
+    "timeout_ms": 60000
+  },
+  "operator_id": "41689e0d-82d2-4857-82af-f56d8d128c4f",
+  "schema_version": "1.0.0",
+  "scope": {
+    "capabilities": [
+      "system",
+      "processes",
+      "network",
+      "files"
+    ],
+    "event_window": {
+      "end": "2026-10-15T09:44:49Z",
+      "start": "2026-10-15T06:39:49Z"
+    },
+    "roots": [
+      {
+        "absolute_path": "/home/jockylab/jocky-scratch",
+        "purposes": [
+          "files"
+        ],
+        "root_id": "98a0f1d6-d82c-4d15-adbd-f5352abb841a"
+      }
+    ],
+    "source_groups": [
+      "kernel_profile",
+      "proc_processes",
+      "proc_net"
+    ]
+  },
+  "valid_from": "2026-10-15T06:39:49Z",
+  "valid_until": "2026-10-15T09:44:49Z"
+}

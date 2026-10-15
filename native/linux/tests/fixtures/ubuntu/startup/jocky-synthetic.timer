@@ -1,0 +1,5 @@
+[Unit]
+Description=JOCKY synthetic timer
+[Timer]
+Unit=jocky-synthetic.service
+OnBootSec=1min
