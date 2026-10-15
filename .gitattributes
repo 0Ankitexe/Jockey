@@ -1,0 +1,2 @@
+# Rustfmt requires Unix newlines on every runner, including Windows.
+*.rs text eol=lf
