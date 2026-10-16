@@ -48,9 +48,9 @@ jobs:
           components: clippy, rustfmt
       - run: cargo fmt --check
       - run: cargo fetch --locked
-      - run: cargo clippy --offline --workspace --all-targets --locked -- -D warnings
+      - run: cargo clippy --offline --workspace --exclude jocky-native-linux --all-targets --locked -- -D warnings
       - name: Versions 0–3 regression, goldens, bounds and fixed-seed campaigns
-        run: cargo test --offline --workspace --locked
+        run: cargo test --offline --workspace --exclude jocky-native-linux --locked
       - name: Version 3 deployed schemas and fixture/file safety
         run: |
           cargo test --offline --locked -p jocky-ir --test schema --test report --test safety

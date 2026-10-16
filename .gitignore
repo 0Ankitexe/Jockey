@@ -29,6 +29,7 @@ build/
 coverage/
 *.tsbuildinfo
 *.log
+!native/linux/tests/fixtures/**/logs/*.log
 
 # Editors and operating systems
 .idea/

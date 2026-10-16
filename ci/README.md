@@ -2,7 +2,7 @@
 
 ## Linux-first scheduling
 
-The [roadmap amendment](../docs/reference/linux-first-roadmap.md) preserves regression jobs.
+The Linux-first roadmap preserves regression jobs.
 Keep existing Windows/Ubuntu compiler/fixture regressions; they do not require
 manual Windows work or establish real collector support. Revised Version 5 must
 add exact Linux distribution/release/architecture/facility evidence. Native VM
@@ -10,15 +10,16 @@ ground truth is distinct from container/userspace checks. Windows artifact,
 collector and agent work is outside the active roadmap (ADR-0023), not reported as passed.
 
 GitHub Actions jobs live in `.github/workflows/ci.yml`. The Ubuntu and Windows
-Rust jobs prepare the legacy schema, fetch locked dependencies, then run formatting,
-offline Clippy and `cargo test --offline --workspace --locked`; the
-workspace command includes the complete Version 0–3 suites and actual
+Rust jobs fetch locked dependencies, then run formatting, offline Clippy and
+workspace tests. The Windows job excludes the Linux-only native collector crate;
+the Linux adapter matrix tests it separately. The portable workspace checks include
+the complete Version 0–3 suites and actual
 `jockyc` binary tests on both newline/path platforms. The dedicated robustness
 target uses a fixed seed and standard-library generation, so it is repeatable
 without a fuzzing service.
 
 Python jobs retain the Version 0 controller Ruff, mypy, and pytest gates and
-explicitly check the preparation utility below with Ruff, strict mypy and pytest.
+explicitly check repository helpers with Ruff and pytest.
 TypeScript jobs retain dashboard formatting, ESLint, type checking, Vitest, and
 build gates. Compose validation checks configuration only and does not enable a
 lab or endpoint adapter.
@@ -47,7 +48,7 @@ verification record for checks actually executed.
 
 Both Rust jobs explicitly repeat deployed schema/report/safety tests and the
 actual fixture/file-adapter integrations after the full regression suite. The
-workspace suite includes 20 IR goldens, 36 verifier-negative artifacts, ten-run
+portable workspace suite includes 20 IR goldens, 36 verifier-negative artifacts, ten-run
 library/CLI determinism, resource boundaries and three fixed-seed 10,000-case IR
 campaigns. Each campaign has a five-minute harness budget; jobs have a 20-minute
 ceiling. No fuzzing service, native collector or live endpoint is used.
