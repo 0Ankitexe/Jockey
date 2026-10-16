@@ -1,455 +1,261 @@
-# JOCKY: Project and Viva Guide
+# JOCKY: project and demonstration guide (through Version 5)
 
-This guide covers the complete project from its foundation through **Version 5**.
-It is intended for understanding the project, explaining it to a teacher and
-running a short demonstration. Commands assume Bash and the repository root.
+## The idea in one minute
 
-## 1. What is this project?
+**Digital forensics** means examining a computer's information to learn what happened. JOCKY is a university project with **two working parts**:
 
-**JOCKY is a typed programming framework for authorised digital forensic work.**
-It combines a small investigation language, a compiler, a safe sample-data
-runner and a separate read-only Linux collector.
+1. **JOCKY language unit:** write an investigation as a `.jky` program. The compiler checks it, and a sample runner gives a result from prepared data.
+2. **Linux collector unit:** run a separate program *inside a Debian VM*. It reads selected, permitted facts from that VM and writes a JSON report.
 
-Digital forensics means collecting and examining computer information to
-understand what happened. For example, an investigator may need to know which
-processes were running, which network connections existed, or whether a file
-matches a known SHA-256 hash.
+The parts **do not connect yet**. A `.jky` program does not start the live collector in Version 5. The browser dashboard only shows whether the controller is running; it does not display reports. Say this clearly during the demonstration.
 
-An easy introduction for the viva:
+**Why build it?** An investigation needs clear requests, understandable results and limits on what can be read. The language checks requests before running them. The collector demonstrates bounded, read-only collection from a real Linux machine. The long-term aim is to join these parts.
 
-> “Our project makes forensic work more structured and repeatable. We can
-> check investigation programs before running them, test their logic using
-> sample data, and collect authorised Linux observations into a consistent
-> JSON report. Through Version 5, the language path and the live collector
-> work separately. Connecting source programs to generated native packages
-> is the next milestone.”
+| Project stage | What was added |
+| --- | --- |
+| V0 | Shared result formats, basic controller and status dashboard. |
+| V1 | Read `.jky` writing and report syntax errors. |
+| V2 | Check names, types, targets and function calls. |
+| V3 | Make a checked JSON plan (**IR**) and run programs with sample data (**fixtures**). |
+| V5 | Separate native Linux collector, real Debian VM tests and a generic-Linux compiler route. |
 
-## 2. Why are we building it?
+Version 4 was an earlier Windows plan. The planned V6 integration is where `.jky` source would call native Linux packages. A version printed by a component is not necessarily the project's stage number.
 
-Investigations often combine commands, scripts and different output formats.
-That makes mistakes, inconsistent records and repeated manual work possible.
-JOCKY explores whether a small typed language and shared data rules can make
-this work easier to check, explain and reproduce.
-
-The goals are to catch program mistakes early, reuse collector components,
-record where observations came from, enforce approved scope and resource
-limits, and show failures honestly. Existing forensic tools can still be
-useful; this project studies the framework around investigation logic and
-controlled collection.
-
-## 3. What was built in each version?
-
-| Version                  | What it added                                                                                                         | Simple explanation                                                              |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| 0: Foundation            | Repository layout, shared data contracts, CI, controller and dashboard foundations                                    | Set up the parts and the rules they share.                                      |
-| 1: Language frontend     | Grammar, parser, syntax tree and source-located errors                                                                | Understand whether a `.jky` program is written correctly.                       |
-| 2: Semantic checking     | Names, types, function contracts and platform rules                                                                   | Check whether a correctly written program makes sense.                          |
-| 3: IR and fixture runner | Intermediate representation, verification and bounded sample-data execution                                           | Turn a program into a checked plan and run it against supplied test data.       |
-| 5: Linux collectors      | Read-only collection, scoped inputs, consistent reports, exact indicator matching and portable Linux compiler support | Collect real authorised observations and validate the implementation on Debian. |
-
-Version 4 was an earlier Windows milestone and is outside the active Linux
-roadmap. The numbering gap does not mean that part of the current Linux demo
-is missing. Product versions and data-format version numbers are separate.
-
-## 4. Architecture and how it works
-
-There are two working execution paths through Version 5:
+## What runs where
 
 ```text
-LANGUAGE AND SAMPLE-DATA PATH
-.jky source -> parser -> type checker -> verified IR
-                                      -> fixture runner -> JSON sample result
-
-STANDALONE LINUX COLLECTION PATH
-Approved identity, authority, policy and request files
-    -> validate scope and limits -> Linux collector workers
-    -> observations from the approved VM -> verified local JSON report
+Your normal computer: .jky -> jockyc checks -> sample fixture -> sample result
+Debian VM:            approved scope -> jocky-collect-linux -> real VM report
+Browser (optional):    dashboard -> controller health/version only
 ```
 
-The parser builds an **AST**, a tree describing the source program. The type
-checker checks names, arguments, return values and target restrictions. The
-compiler then produces **IR**, a simpler instruction format that is verified
-before the fixture runner uses it.
+The **host** is your real Fedora computer. The **guest** is Debian inside the VM. Use a VM so the demonstration reads a separate machine with known, controlled contents. The original text-only Debian VM was used for saved V5 evidence. A new desktop VM is easier to show with a mouse and keyboard; it is a new demonstration, not the same acceptance test.
 
-The fixture runner reads supplied sample data. It does not inspect the
-developer's machine. The new portable Linux language route can parse, check,
-build and verify IR; native execution from that source is future work.
+## Unit 1: write and run a `.jky` program with sample data
 
-The standalone collector first checks five kinds of input:
-
-| Input                         | What it means                                                     |
-| ----------------------------- | ----------------------------------------------------------------- |
-| Endpoint designation          | Identifies the approved VM.                                       |
-| Authorisation                 | Records the case, operator, permitted work and time window.       |
-| Local policy                  | Sets allowed sources, paths and resource limits.                  |
-| Collection request            | Selects the approved observations wanted for this run.            |
-| Indicator set, when requested | Supplies known hashes, paths, IP addresses or domains to compare. |
-
-The collector applies the most restrictive allowed scope. Small worker
-processes read approved sources, and a separate publisher writes a new report
-without overwriting an existing one. The report includes observations,
-source references, errors, identities and integrity hashes.
-
-The controller and dashboard form a third foundation: the controller exposes
-health and version information, and the dashboard displays it. Investigation
-assignment, connected endpoint agents and collected-result views are planned.
-
-## 5. Technologies and why we use them
-
-| Technology                                | Role and reason                                                                                                                                |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Rust and Cargo                            | Language, IR, shared library and native collector. Rust provides strong types and memory-safety checks; Cargo manages builds and dependencies. |
-| Pest                                      | Defines and parses the JOCKY grammar.                                                                                                          |
-| Serde and JSON                            | Convert typed Rust data into readable, structured files and back.                                                                              |
-| JSON Schema                               | Defines valid input and output shapes so Rust and Python agree.                                                                                |
-| Tokio, zbus and optional libsystemd       | Support bounded asynchronous work, read-only systemd queries and journal access.                                                               |
-| Python 3.12, FastAPI and Pydantic         | Controller API foundation, validated configuration and test tooling.                                                                           |
-| React, TypeScript and Vite                | Dashboard interface with type checking and development/build tools.                                                                            |
-| PostgreSQL, Redis, SQLAlchemy and Alembic | Prepared stack for future stored management data, queues and database changes; current health routes do not use it.                            |
-| Cargo tests, Pytest and Vitest            | Test Rust, Python and interface behavior, including rejected inputs.                                                                           |
-| GitHub Actions and Docker Compose         | Define automated checks and local service configuration. Local passes do not imply a hosted CI run.                                            |
-| Debian VM with QEMU/libvirt               | Provides the isolated, repeatable Linux environment used for native collector testing.                                                         |
-
-## 6. What can the Linux collector observe?
-
-| Category    | Information collected when approved and readable                                         |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| System      | OS, kernel, architecture, distribution and hostname.                                     |
-| Processes   | Running process IDs, ownership and available command/start metadata.                     |
-| Services    | Existing systemd services and their observed states.                                     |
-| Connections | Current socket addresses and ports, with process ownership where readable.               |
-| Persistence | Approved startup entries such as systemd units/timers, cron and desktop autostart files. |
-| Files       | Approved regular-file metadata and complete SHA-256 hashes.                              |
-| Events      | Selected journal or supported RFC5424 text log entries within a time window.             |
-| Drivers     | Loaded Linux kernel module information.                                                  |
-| Indicators  | Exact comparisons against supplied hashes, paths, IP addresses and domains.              |
-
-Read-only means the collector does not intentionally change the evidence
-sources. Ordinary reads can still cause access-time or audit updates. It does
-not promise an immutable disk snapshot. It does not elevate privileges or
-turn an exact indicator match into a claim that malware was detected.
-
-## 7. Important folders
-
-| Folder                                    | Purpose                                                               |
-| ----------------------------------------- | --------------------------------------------------------------------- |
-| `language/`, `ir/`                        | Source language, checking, intermediate format and fixture execution. |
-| `forensic-lib/`, `native/linux/`          | Shared collection rules and Linux-specific source access.             |
-| `shared/`                                 | Data schemas and shared types.                                        |
-| `controller/`, `dashboard/`               | Current API and interface foundations.                                |
-| `examples/`, `fixtures/`, `tests/`, `ci/` | Example programs, sample data, tests and automated checks.            |
-| `docs/`                                   | This guide and useful project references.                             |
-| `project-records/`                        | Decisions, release checks and original test evidence.                 |
-
-`codegen/`, `runtime/`, `transforms/` and `transport/` contain boundaries for
-later milestones; their presence does not mean those workflows are delivered.
-
-### How to read `docs/`
-
-`docs/` explains the project **as it stands now**. Start with this guide;
-open a reference only when you want the exact design or rules for one part.
-These files have different jobs:
-
-| File                                                                                 | What it tells you in simple terms                                                   |
-| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| [README.md](README.md)                                                               | A short menu of the documentation.                                                  |
-| [PROJECT_GUIDE.md](PROJECT_GUIDE.md)                                                 | The overall story, setup, demo, results and viva answers.                           |
-| [current-state.md](current-state.md)                                                 | What is complete today, what was tested and what is next.                           |
-| [reference/architecture.md](reference/architecture.md)                               | The parts of the system and how they fit together.                                  |
-| [reference/language-reference.md](reference/language-reference.md)                   | How to write a `.jky` program.                                                      |
-| [reference/diagnostics.md](reference/diagnostics.md)                                 | What compiler errors and exit codes mean.                                           |
-| [reference/module-contracts.md](reference/module-contracts.md)                       | Which investigation functions the language knows and whether they can actually run. |
-| [reference/platform-capabilities.md](reference/platform-capabilities.md)             | Which source targets and platform features a program may name.                      |
-| [reference/ir-specification.md](reference/ir-specification.md)                       | The checked instruction format made from source code.                               |
-| [reference/reference-interpreter.md](reference/reference-interpreter.md)             | How the Version 3 runner uses supplied sample data.                                 |
-| [reference/cross-platform-result-model.md](reference/cross-platform-result-model.md) | How identities, observations, reports and errors are represented.                   |
-| [reference/linux-collectors.md](reference/linux-collectors.md)                       | Version 5 collector inputs, safety rules, VM procedure and report handling.         |
-| [reference/linux-support-matrix.md](reference/linux-support-matrix.md)               | Exactly which Linux setup and collector facilities have native evidence.            |
-| [reference/security-boundary.md](reference/security-boundary.md)                     | What collection is allowed and what the project forbids.                            |
-| [reference/linux-first-roadmap.md](reference/linux-first-roadmap.md)                 | Which features are planned for V6–V9; it is a plan, not a test result.              |
-
-### How to read `project-records/`
-
-`project-records/` holds **why decisions were made and proof of past work**.
-It is for checking a claim, not for learning commands from start to finish.
-Many records contain dated intermediate statements such as “still pending.”
-Use [current-state.md](current-state.md) for the latest status, then the final
-section at the top of a release record for its final verdict.
-
-| File                                                                                                | What it tells you in simple terms                                                                                             |
-| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [README.md](../project-records/README.md)                                                           | Menu and explanation of the records.                                                                                          |
-| [decisions.md](../project-records/decisions.md)                                                     | Dated architecture decisions, called ADRs, and why choices changed.                                                           |
-| [traceability.md](../project-records/traceability.md)                                               | Where each numbered project requirement is implemented and tested.                                                            |
-| [operational-acceptance.md](../project-records/operational-acceptance.md)                           | The rules for deciding whether live and future connected features pass.                                                       |
-| [constitution-audit.md](../project-records/constitution-audit.md)                                   | The review that adopted the project rules and checked earlier V0/V1 work.                                                     |
-| [linux-first-governance-verification.md](../project-records/linux-first-governance-verification.md) | Proof that the Linux-first roadmap change was reflected in project guidance; it is not a collector test.                      |
-| [operational-readiness-verification.md](../project-records/operational-readiness-verification.md)   | Review of planned approval, trust and connected-system acceptance rules.                                                      |
-| [planning-consolidation-verification.md](../project-records/planning-consolidation-verification.md) | How original Linux tasks were regrouped into the current V5–V9 plan.                                                          |
-| [version-2-verification.md](../project-records/version-2-verification.md)                           | Version 2 checker test results, with older partial checkpoints below the final result.                                        |
-| [version-3-phases-4-5-checkpoint.md](../project-records/version-3-phases-4-5-checkpoint.md)         | A **mid-build** V3 record: IR verification and sample-data execution reached T074; V3 was still unfinished _at that date_.    |
-| [version-3-verification.md](../project-records/version-3-verification.md)                           | The **final V3 release** record: all 100 tasks, final tests and limitations. Its later sections preserve earlier checkpoints. |
-| [version-5-verification.md](../project-records/version-5-verification.md)                           | The **V5 release** record: standalone Linux collection, Debian VM gates, final test results and historical task hand-offs.    |
-| [archive-manifest.json](../project-records/archive-manifest.json)                                   | SHA-256 fingerprints for retained record files, used to notice accidental changes.                                            |
-
-The two Version 3 files are **not the same result**: the checkpoint explains
-how part of V3 was built; the V3 release file gives the later final verdict.
-The V5 file concerns a different product version and real Debian collection.
-They repeat some background so each dated hand-off makes sense on its own.
-There is no second copy of these files in `docs/`.
-
-### What is inside `project-records/evidence/version-5/`?
-
-Start at the [evidence index](../project-records/evidence/version-5/index.md).
-The following files answer different questions:
-
-| File or group                                                                                                                                                                                                                                                  | What it proves or records                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [baseline.json](../project-records/evidence/version-5/baseline.json)                                                                                                                                                                                           | The test baseline before V5 changes.                                                                                         |
-| [memory-review.md](../project-records/evidence/version-5/memory-review.md), [resource-adoption.md](../project-records/evidence/version-5/resource-adoption.md), [confinement.md](../project-records/evidence/version-5/confinement.md)                         | Memory limits, an earlier resource problem and rules that keep reads inside approved paths.                                  |
-| [report-foundation.md](../project-records/evidence/version-5/report-foundation.md), [worker-read-foundation.md](../project-records/evidence/version-5/worker-read-foundation.md), [launch-control.md](../project-records/evidence/version-5/launch-control.md) | How reports, bounded reading and child-process launches were checked.                                                        |
-| [limits-and-recovery.md](../project-records/evidence/version-5/limits-and-recovery.md), [indicator-evaluation.md](../project-records/evidence/version-5/indicator-evaluation.md)                                                                               | Numeric limits, failure handling and exact indicator-match results.                                                          |
-| [checkpoint/debian/](../project-records/evidence/version-5/checkpoint/debian/README.md)                                                                                                                                                                        | The first real four-category Debian check: approval, known test facts, original report, denials and hashes.                  |
-| [facilities/](../project-records/evidence/version-5/facilities/services-persistence.md)                                                                                                                                                                        | Separate offline and real-VM results for services, persistence, events and modules, including machine-readable T172 results. |
-| [faults/](../project-records/evidence/version-5/faults/native.md)                                                                                                                                                                                              | Offline fault checks and the separate real Debian fault campaign.                                                            |
-| [debian/](../project-records/evidence/version-5/debian/README.md)                                                                                                                                                                                              | The final Debian campaign: one cold and ten warm reports, measurements, original inputs and checksums.                       |
-| [regression/](../project-records/evidence/version-5/regression/rust.md)                                                                                                                                                                                        | Final local Rust, Python, dashboard and Compose check results.                                                               |
-
-Within `checkpoint/debian/` and `debian/`, `approval-record`, `authorisation`,
-`policy`, `request` and `lab-scenario` files state **who/what/when was approved**.
-`inventory`, `host-preflight` and image files identify the VM and its starting
-state. `expected`, `observed`, `oracle` and `negative` files compare known test
-facts with results and denials. `report.json` or `lab-small-00.json` through
-`lab-small-10.json` are the actual outputs. `samples.jsonl` and `summary.json`
-summarise runs; `stdout` and `stderr` files preserve each command's output;
-SHA-256 manifests check retained bytes. The repeated empty `stderr` files are
-separate per-run evidence, not extra project documents.
-
-## 8. How to set up and run the project
-
-The compiler demo needs Rust **1.98.1 or newer** and a C compiler/linker.
-The optional controller/dashboard needs Python **3.12** and Node **22.20+ on the 22.x line**.
-Docker and a VM are not needed for the sample-data demo.
+Run these commands on your **normal computer**, in the folder with `Cargo.toml`:
 
 ```bash
-cd /path/to/JOCKEY
+cd /home/zer0/main/projects/jockey
 bash scripts/setup.sh --demo
+mkdir -p target/demo
+cp examples/triage.jky target/demo/investigate.jky
 ```
 
-On another computer, use its repository location in the first command.
-Dependency fetching needs internet access once; cached builds can run offline.
-The script checks prerequisites, fetches locked dependencies and builds the
-workspace. The optional `journal` collector build additionally
-needs libsystemd development files; see the [collector guide](reference/linux-collectors.md).
+`cd` enters the project. `setup.sh --demo` checks tools and builds the two command-line programs; it may download Rust packages on first use. `mkdir` makes a place for demo output. `cp` makes a writable copy of the example program. To write it yourself, run `nano target/demo/investigate.jky`, paste the program below, save with `Ctrl+O`, `Enter`, and exit with `Ctrl+X`.
 
-For the optional controller/dashboard demonstration, run `bash scripts/setup.sh --full`
-instead of `--demo`. It also installs the Python and Node project dependencies.
-The equivalent manual commands are:
+```jocky
+module triage
+target windows | ubuntu
 
-```bash
-python3.12 -m venv controller/.venv
-controller/.venv/bin/python -m pip install -e './controller[dev]'
-(cd dashboard && npm ci)
+fn investigate(target: endpoint) -> forensic_result {
+    let system = forensic.system.profile(target)
+    let processes = forensic.process.list(target)
+    let connections = forensic.network.connections(target)
+    let indicators = forensic.indicator.correlate(system, processes, connections)
+    return forensic_result(system, indicators)
+}
+
+run investigate on selected_endpoints
 ```
 
-Start these in two separate terminals from the repository root:
+Read it aloud: `module` names the program. `target` says which **sample platforms** this old example accepts; `ubuntu` is a fixture label, not a claim of live Ubuntu testing. `fn` defines a function. The input `target: endpoint` means “a computer.” `let` stores an answer. The four `forensic.*` calls ask for a system profile, process list, network connections and comparison with supplied indicators. `return` combines the system and indicator answers. `run` selects this function for the chosen sample endpoint. The types after `:` and `->` say what kind of input and result are expected.
+
+Now run one command at a time:
 
 ```bash
-# Terminal 1
-(cd controller && .venv/bin/python -m uvicorn jocky_controller.main:app --host 127.0.0.1 --port 8000)
-
-# Terminal 2
-(cd dashboard && npm run dev -- --host localhost --port 5173 --strictPort)
+target/debug/jockyc parse target/demo/investigate.jky
+target/debug/jockyc check target/demo/investigate.jky
+target/debug/jockyc build-ir target/demo/investigate.jky --output target/demo/investigate.ir.json
+target/debug/jockyc verify-ir target/demo/investigate.ir.json
+target/debug/jockyc run-fixture target/demo/investigate.jky --fixture examples/fixtures/triage/ubuntu > target/demo/sample-result.json
+python3 -m json.tool target/demo/sample-result.json | head -40
 ```
 
-Open `http://localhost:5173`. The page shows controller health and version.
-`http://127.0.0.1:8000/health` returns `{"status":"ok"}`. Stop the servers
-with `Ctrl+C` when finished.
+| Command | What it does | What success means |
+| --- | --- | --- |
+| `parse` | Checks punctuation and grammar. | Prints `parsed: ...`; the program is written in valid JOCKY syntax. |
+| `check` | Checks names, types and allowed calls. | Usually prints nothing; exit code `0` means those checks passed. |
+| `build-ir` | Writes a JSON **intermediate representation (IR)**: a checked plan. | `target/demo/investigate.ir.json` exists. It is data, not a Linux executable. |
+| `verify-ir` | Checks that saved plan's format and rules. | Usually prints nothing and exits `0`. |
+| `run-fixture` | Compiles the source again, supplies prepared answers, writes result JSON. | `sample-result.json` exists. It is a **sample** result, not VM evidence. |
+| `json.tool ... | head` | Makes the first lines of JSON readable. | You can inspect the answer. `head` only shortens what is displayed. |
 
-### What every part of the dashboard means
-
-The dashboard is a small **service health page** built in the Version 0
-foundation. It does not display the Version 5 Debian report. The page checks
-the controller's `/health` and `/version` routes when it loads.
-
-| On-screen part                       | What it tells you                                                                                                                                                     |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `JOCKY` heading and description      | The name and purpose of the project.                                                                                                                                  |
-| `Dashboard` card: `Ready`            | The React page loaded in your browser. This does **not** mean the collector, controller or VM is running.                                                             |
-| `Version 0 status interface`         | This page began as a foundation feature. The overall project is complete through Version 5.                                                                           |
-| `Controller`: `Checking controller…` | The browser is waiting for the controller's two API responses.                                                                                                        |
-| `Controller`: `Online`               | Both API responses were valid. `Service` is the API name (`JOCKY Controller`); `Version` is its package version (`0.0.0`), **not** the project's Version 5 milestone. |
-| `Controller`: `Unavailable`          | The API could not be reached or returned an error or unexpected data. The line below says what went wrong.                                                            |
-| `Version 0 scope` note               | The page reports service health only; endpoint lists, tasks and forensic results are future dashboard work.                                                           |
-
-There are no investigation buttons or report views yet. The check happens on
-page load; refresh the browser to check again. For a simple failure demo, stop
-the controller, refresh and show `Unavailable`, then restart it and refresh to
-show `Online`. The dashboard's own `Ready` card stays visible in both cases.
-
-## 9. A short demonstration for the teacher
-
-Use this order to show **the actual progress through Version 5**: checked
-source, a sample-data run, a saved real Debian collector report, and the
-separate dashboard foundation. The VM display is optional for the short demo.
-
-**First, check a program and execute sample-data logic:**
+To check the exact outcome without reading a large JSON file:
 
 ```bash
-target/debug/jockyc parse examples/triage.jky
-target/debug/jockyc check examples/triage.jky
-target/debug/jockyc run-fixture examples/triage.jky --fixture examples/fixtures/triage/ubuntu
-```
-
-Explain that parsing checks syntax, checking checks meaning, and execution
-uses the supplied fixture. A clean `check` can be silent with exit code 0.
-The result says `mode: "fixture"`, has a successful outcome and includes the
-sample hostname `fixture-ubuntu`. This is the language demonstration.
-
-**Next, show generic Linux source checking:**
-
-```bash
-target/debug/jockyc check examples/linux/triage.jky --language-version 3.0.0
-```
-
-This demonstrates the explicit portable compiler route. The language version
-flag selects the new syntax/contracts; it does not launch collection.
-
-**Then, verify a saved report from the real Debian campaign:**
-
-```bash
-target/debug/jocky-collect-linux verify-report \
-  /home/zer0/main/jockey/project-records/evidence/version-5/debian/lab-small-00.json
-```
-
-Show its short summary without printing the whole report:
-
-```bash
-python3.12 - <<'PY'
+python3 - <<'PY'
 import json
-from pathlib import Path
-p = Path('project-records/evidence/version-5/debian/lab-small-00.json')
-r = json.loads(p.read_text())
-print('Report kind:', r['report_kind'])
-print('Collected at:', r['started_at'])
-print('Records:', len(r['records']))
-print('Summary:', r['summary'])
+r = json.load(open('target/demo/sample-result.json'))
+print('Mode:', r['mode'])
+print('Status:', r['outcome']['status'])
+print('Computer:', r['outcome']['value']['value']['system']['hostname'])
+print('Indicators:', r['outcome']['value']['value']['indicators'])
 PY
 ```
 
-State clearly that this verifies an existing real VM result. It does not
-collect fresh information. Report verification checks format and content
-integrity; a hash alone does not prove who produced a report.
+Expect `Mode: fixture`, `Status: success`, and `Computer: fixture-ubuntu`. `success` means the sample program ran correctly. It does **not** mean the VM was examined. The indicator shown is an authored example match, not malware detection. If `check` reports an error, read its line/column and fix that line. You can show the checker catches mistakes with `target/debug/jockyc check language/tests/fixtures/semantic/invalid/non-bool-condition.jky`; this command is **expected to fail** because a condition has the wrong type.
 
-The prepared VM is `jocky-v5-debian-13-7`. To show the installed guest:
+### What is inside the sample data?
+
+Open [fixture.json](../examples/fixtures/triage/ubuntu/fixture.json) and [expected-result.json](../examples/fixtures/triage/ubuntu/expected-result.json). These are ordinary JSON text files written for a repeatable test.
+
+| Field or call | Plain meaning |
+| --- | --- |
+| `schema_version` | Which rules the JSON follows. |
+| `fixture_id`, `endpoint_id`, `record_id` | Unique labels that link the sample computer and its records. They are not real VM IDs. |
+| `observed_at` | Fixed example time, so repeated runs get the same answer. |
+| `forensic.system.profile` | Prepared answer: Ubuntu label `fixture-ubuntu`, release `synthetic`. |
+| `forensic.process.list` | One invented process: PID `1200`, name `fixture-demo`, path `/fixture/demo`. |
+| `forensic.network.connections` | One invented TCP connection tied to that process. The two IPs are example addresses, and port `443` is the remote port. |
+| `forensic.indicator.correlate.expected` | Inputs that the sample runner expects from the earlier three calls. This checks that values are passed through correctly. |
+| `forensic.indicator.correlate.outcome` | One deliberately authored `fixture_match` pointing to the process and connection record IDs. Its message explicitly says it is not live detection. |
+| `expected-result.json` | The final answer we expect: the sample system plus that authored indicator. |
+
+A **provider** is a prepared answer for one named function. The sample runner looks up these providers instead of reading `/proc`, logs or network state. Thus the demo proves the language path works; it does not claim to find a real incident.
+
+## Unit 2: show real Debian collector results
+
+For an immediate, reliable presentation, show the **saved** report from the original Debian VM campaign on your normal computer:
 
 ```bash
-virsh -c qemu:///session start jocky-v5-debian-13-7
-virt-manager --connect qemu:///session
+target/debug/jocky-collect-linux verify-report "$PWD/project-records/evidence/version-5/debian/lab-small-00.json"
+python3 - <<'PY'
+import json
+r = json.load(open('project-records/evidence/version-5/debian/lab-small-00.json'))
+print('Kind:', r['report_kind'])
+print('Status:', r['summary']['status'])
+print('Records:', len(r['records']))
+print('Errors:', r['summary']['errors'])
+PY
 ```
 
-Open that VM in Virtual Machine Manager. The VM is a separate computer
-simulated on the host, used to make collection isolated and repeatable.
-Only Debian is required for the current native demonstration.
+`verify-report` checks saved JSON format and internal integrity; it should print `ReportValid`. It does not recollect or independently prove where bytes came from. The second command counts the saved records. Expect `Kind: live_lab`, `Status: partial`, and about 300 records. `partial` means some extra VM facts were unreadable to the ordinary user; allowed facts were still recorded. The [Debian evidence notes](../project-records/evidence/version-5/debian/README.md) give the known test facts and 11 measured runs.
 
-**Finally, show the controller and dashboard:** use the two terminal commands
-in Section 8, open `http://localhost:5173`, and point out `Dashboard: Ready`,
-`Controller: Online`, `Service` and `Version`. Explain that the controller
-status is live, but the Debian report is shown through the collector command
-above because report views are planned for Version 8. If you want to show a
-failure state, stop the controller and refresh the page; it should say
-`Unavailable`. Restart the controller and refresh to restore `Online`.
-The `0.0.0` value is the controller package version, not evidence that the
-whole JOCKY project is only at Version 0.
+For **fresh** collection on a new desktop VM, follow the next section. Its short command path is a **system-only smoke test**. If you want a demonstration comparable to the original Version 5 campaign, use the full LAB-SMALL procedure after that; the system-only result is not a substitute.
 
-For a **fresh live collection**, prepare current approval/policy/request
-files and a fresh VM preflight, then follow the exact command in the
-[collector guide](reference/linux-collectors.md#first-debian-checkpoint-preparation-and-commands).
-The saved campaign inputs have expired and are historical records. The
-ordinary developer workstation is not the designated collection endpoint.
+## Make a Debian VM with a real desktop
 
-## 10. What results can we honestly show?
+The existing `jocky-v5-debian-13-7` VM has a **text login**. Its VNC console is graphical as a window, but Debian inside has no desktop. GNOME Boxes can show “Unsupported display” for that VNC console. Use **Virtual Machine Manager** (`virt-manager`), and create a **separate** desktop VM. Keep the original evidence VM intact.
 
-The native campaign used Debian 13.7, 2 virtual CPUs and 4 GiB RAM, with no
-network adapter. It checked five known processes, five loopback connection
-pairs, twenty known 64 KiB files, ten journal markers and 1,000 indicators.
-One cold run means the first collection after boot; ten warm runs followed.
+1. On Fedora, run `virt-manager --connect qemu:///session`. Choose the **QEMU/KVM user session** connection, not `qemu:///system`.
+2. Choose **File → New Virtual Machine → Local install media**. Select `/home/zer0/Downloads/debian-13.7.0-amd64-netinst.iso`. If that path is gone, download the current Debian amd64 installer from Debian.
+3. Give the new VM a distinct name, for example `jocky-presentation-debian`; use about **2 CPUs, 4 GiB RAM and 30 GiB disk**. Allow a network connection during installation because the net installer downloads packages.
+4. Start **Graphical install**. Create your own Debian user and password. On **Software selection**, keep **Debian desktop environment** and a desktop choice such as GNOME, plus **standard system utilities**. Finish installation and reboot.
+5. Double-click the new VM in virt-manager, open **Console**, click inside it and log in. Mouse and keyboard now work in the Debian desktop. Open its Terminal application.
 
-| Measurement                      | Actual recorded result                     | Limit                                  |
-| -------------------------------- | ------------------------------------------ | -------------------------------------- |
-| Native runs                      | 11, all seeded facts checked               | One cold plus ten warm                 |
-| Slowest elapsed time             | 2.222 seconds                              | 60 seconds per run                     |
-| Highest aggregate peak memory    | About 74.6 MiB                             | 256 MiB                                |
-| Largest report                   | About 670 KiB                              | 10 MiB                                 |
-| Highest accepted record count    | 302                                        | 10,000                                 |
-| Exact indicator corpus, each run | 51 correct matches; 949 correct nonmatches | No unexpected or missed seeded matches |
+The official [Debian installer guide](https://www.debian.org/releases/trixie/amd64/ch06s03.en.html) explains that selecting “Desktop environment” installs the graphical desktop. If the installer does not offer a network mirror, use Debian's DVD image or connect the VM to a working virtual network. A desktop login screen is the visual check that installation succeeded.
 
-Reports are **partial** because the ordinary VM user could not read some
-unrelated process/socket-owner fields. Those denials are visible; every known
-lab fact still matched. Complete, partial and failed are different outcomes.
-Native collector exit codes include 0 for complete and 2 for partial reports.
+## Quick system-only check inside your new desktop VM
 
-Rust workspace and journal-feature checks, 185 Python tests, 18 dashboard
-tests and Compose configuration passed locally. Full records are preserved in
-[the test archive](../project-records/evidence/version-5/index.md).
-Other distributions and hosted CI are not claimed as verified native runs.
+Do the next commands in **Debian's Terminal**, not Fedora's. Use only a VM you own and intend to examine. This simple demo requests only the system profile; it does not request files, logs, processes or indicators. The generated IDs are labels for this one demo run, and the request expires after two hours. Review the four generated JSON files before running `collect`.
 
-## 11. Common viva questions
+1. While the new VM has internet, install build tools, then get your **current** repository into the VM. Push your local guide/helper changes first if you want the clone to include them:
 
-**Is this a new operating system or a normal scripting language?**
-It is a small domain-specific language and a forensic framework. It runs on
-an existing operating system and focuses on typed investigation workflows.
+```bash
+sudo apt update
+sudo apt install -y build-essential curl git pkg-config ca-certificates python3
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+. "$HOME/.cargo/env"
+git clone https://github.com/0Ankitexe/Jockey.git
+cd Jockey
+bash scripts/setup.sh --demo
+```
 
-**Why use types?**
-Types catch mistakes such as passing an integer where a process list is
-expected. Checks happen before the fixture program executes.
+`apt` installs tools, `rustup` installs Rust/Cargo, `git clone` copies the repository, and `setup.sh` builds the collector **inside Debian**. See the [official Rust installer](https://rust-lang.org/tools/install/) if its prompt changes. `target/debug/jocky-collect-linux` is the collector binary. If your GitHub repository does not yet contain the helper below, copy the current project into the VM first or push it before cloning.
 
-**Why build an IR?**
-IR gives the compiler a simpler, checkable instruction format. It supports
-verification and keeps parsing separate from execution and future backends.
+2. On **Fedora**, run `virsh -c qemu:///session domuuid jocky-presentation-debian` and copy the UUID it prints. This is the identifier of the new VM. You may also try `cat /sys/class/dmi/id/product_uuid` in Debian, but ordinary users cannot read it on some systems. Shut down the VM, disconnect its virtual network in virt-manager's **Show virtual hardware details → NIC** (or remove that NIC), then start it again. This makes the collection demo an isolated guest. Reopen Terminal and `cd ~/Jockey`.
 
-**Does compiling a `.jky` file collect real data?**
-Through Version 5, compilation checks/builds a plan and fixture execution
-uses sample data. Real collection is an explicitly invoked separate command.
+3. Prepare a **new**, private, system-only request and check it. Change the directory suffix if you repeat the demo; the helper refuses to reuse an old request.
 
-**Why use a VM?**
-It gives us a known OS and permissions, separates test objects from personal
-host data and lets us repeat controlled tests for a demonstration.
+```bash
+python3 scripts/prepare_debian_demo_collection.py --vm-name jocky-presentation-debian --vm-uuid YOUR-VM-UUID --output-dir "$HOME/jocky-demo-inputs-1"
+ls -l "$HOME/jocky-demo-inputs-1"
+cat "$HOME/jocky-demo-inputs-1/endpoint-designation.json"
+mkdir -m 700 "$HOME/jocky-demo-reports"
+BIN="$PWD/target/debug/jocky-collect-linux"
+INPUT="$HOME/jocky-demo-inputs-1"
+"$BIN" validate-inputs --designation "$INPUT/endpoint-designation.json" --authorisation "$INPUT/authorisation.json" --policy "$INPUT/policy.json" --request "$INPUT/request.json"
+```
 
-**Does SHA-256 prove that a file is safe?**
-It is a content fingerprint. Matching a supplied hash identifies matching
-bytes; it does not by itself establish safety or maliciousness.
+Replace `YOUR-VM-UUID` with the UUID printed on Fedora. The helper makes four `0600` files in a new `0700` directory. **Designation** names this VM and its libvirt UUID; **authorisation** records the case/operator IDs, allowed system data and time window; **policy** lists the allowed kernel-profile source; **request** asks to run the system collector. `validate-inputs` checks them without reading VM evidence. It should return `InputsValid`. A failed validation means stop and read its error; do not substitute the expired test fixtures.
 
-**Why can a partial result still be useful?**
-Some facts are readable and some are denied. The report keeps valid facts
-and states the omissions instead of inventing missing information.
+4. Start the actual VM read, then check and inspect the **new** report:
 
-**What is still planned?**
-V6: generated Linux packages and source-selected native calls. V7: connected
-agent/controller work. V8: investigation dashboard and multiple endpoints.
-V9: protection, transport, research and integrated Linux delivery.
+```bash
+"$BIN" collect --allow-live-lab --designation "$INPUT/endpoint-designation.json" --authorisation "$INPUT/authorisation.json" --policy "$INPUT/policy.json" --request "$INPUT/request.json" --output "$HOME/jocky-demo-reports/system-1.json"
+"$BIN" verify-report "$HOME/jocky-demo-reports/system-1.json"
+python3 - <<'PY'
+import json
+from pathlib import Path
+r = json.loads((Path.home() / 'jocky-demo-reports/system-1.json').read_text())
+print('Report kind:', r['report_kind'])
+print('Status:', r['summary']['status'])
+print('Record count:', len(r['records']))
+print('Record categories:', sorted({item.get('category', '?') for item in r['records']}))
+PY
+```
 
-## 12. Short glossary
+`--allow-live-lab` is the explicit choice to read the VM. `--output` names a **new** report file; it will not overwrite one. `verify-report` should print `ReportValid`. A `complete` result means all requested system data was collected; `partial` means the report names something it could not read; `failed` means inspect the error and do not claim success. In the report, `records[0].payload.hostname.value` and `distribution_id.value` are the collected computer name and distribution. Compare them with `hostnamectl` and `cat /etc/os-release` in the **same VM**. This is a useful live sanity check, not the full 11-run acceptance campaign. If `collect` fails or publishes no file, keep the terminal output and inspect the typed error; do not present the saved report as if it were this fresh run.
 
-| Term                               | Simple meaning                                                                            |
-| ---------------------------------- | ----------------------------------------------------------------------------------------- |
-| DSL                                | A language designed for one area of work; here, forensic investigation.                   |
-| Compiler                           | Software that checks source and converts it into another representation.                  |
-| Parser / grammar                   | The parser recognises source structure using the language's writing rules.                |
-| AST                                | Abstract Syntax Tree: a structured tree of the written program.                           |
-| Semantic checking                  | Checking meaning: names, types, calls and platform rules.                                 |
-| IR                                 | Intermediate Representation: the compiler's simpler instruction plan.                     |
-| Fixture                            | Supplied sample data used for repeatable tests.                                           |
-| Collector / adapter                | Code that reads an approved information source; an adapter handles OS-specific details.   |
-| Endpoint / operator / case         | The examined computer, the person running the work, and the investigation reference.      |
-| Policy / scope                     | The rules and exact sources/actions permitted for a run.                                  |
-| Schema / JSON                      | A schema defines the allowed structure; JSON is the structured text format used for data. |
-| Hash / integrity                   | A content fingerprint / checking whether recorded content remains consistent.             |
-| Indicator                          | A supplied value to compare, such as a known hash, path, IP address or domain.            |
-| Provenance                         | Information about where an observation came from and its collection context.              |
-| VM / host / guest                  | A virtual computer / the real machine running it / the OS inside it.                      |
-| Loopback                           | A connection within the same computer, using addresses such as `127.0.0.1`.               |
-| Kernel / module / systemd          | The OS core / a loaded kernel component / a Linux service manager.                        |
-| API / controller / dashboard       | A software interface / the management service / its user interface.                       |
-| Unit / integration / negative test | Tests one part / connected parts / expected rejection or failure.                         |
-| CI                                 | Continuous Integration: automated checks configured for code changes.                     |
+## Full VM demonstration: repeat the original style
+
+The original Debian run used the [LAB-SMALL harness](../tests/lab/linux/lab_campaign.py), not the system-only helper. This is the path to use if you want a fresh demonstration with measured results. The harness temporarily creates **five harmless processes, five local connection pairs, twenty sample files and ten journal markers** in the approved VM. It supplies **1,000 exact comparison values**, asks the native collector to read the chosen sources, and checks the report against those known facts. It runs once after a cold boot and ten more times on the same boot. Each report is real VM data; the planted facts give an independent answer to compare against.
+
+The new desktop VM needs its **own** inventory and current approval/configuration files. The old VM's IDs, disk hash, machine ID, binary hash, journal path, approval window and output paths cannot be reused. The full run requires:
+
+1. Build the collector **in the Debian guest** with `cargo build --release --locked -p jocky-native-linux --features journal`. Install `libsystemd-dev` before this build. Install Python **3.12** and the harness test dependencies too; Debian 13's default Python may be 3.13, but the controller package requires 3.12.
+2. Set a deliberate demo hostname ending in `.invalid`, provide a readable user journal, and prepare separate private scratch and output directories. These are setup facts, not malware.
+3. Shut down the VM and disconnect its NIC. On Fedora, record its libvirt UUID, disk path and disk SHA-256. Inside Debian, record `/etc/machine-id`. Create a new `inventory.json` linking these facts. Run the host's `tests.lab.linux.host_preflight` **while the VM is shut off**; it rejects the wrong VM or a VM with a NIC.
+4. Create fresh, linked designation, authorisation, policy, request and `lab-scenario.json` files for this VM and a current time window. Include the collector's **actual SHA-256**. The authorised sources must cover system, processes, connections, files, events and indicators. The journal path must be the readable journal file in this new VM.
+5. Boot the VM and run `tests.lab.linux.run_scenario --profile lab-small-v1 --allow-live-lab` with those files and the new release collector. The harness runs collection and verifies all 11 reports. The full argument list and exact file rules are in the [collector procedure](reference/linux-collectors.md#t178-debian-lab-small-replay).
+6. Show `samples.jsonl`, `lab-small-00.json` through `lab-small-10.json`, and the harness summary. Explain **known fact matched**, **partial permission denial**, time, memory and report size. A passing new run is evidence for **your new VM**; it does not change the pinned V5 acceptance verdict.
+
+**Do not feed the four files from `prepare_debian_demo_collection.py` into LAB-SMALL.** They deliberately grant only the system profile. The full run needs its own wider, explicitly reviewed request and the host/guest preflight described above.
+
+## Optional dashboard
+
+On your normal computer, `bash scripts/setup.sh --full` prepares its dependencies. Then open two terminals in the project folder:
+
+```bash
+(cd controller && .venv/bin/python -m uvicorn jocky_controller.main:app --host 127.0.0.1 --port 8000)
+```
+
+```bash
+(cd dashboard && npm run dev -- --host localhost --port 5173 --strictPort)
+```
+
+Open `http://localhost:5173`. **Dashboard Ready** means the webpage loaded. **Controller Online** means its health/version requests succeeded. **Unavailable** means the webpage cannot reach the controller. The displayed service/version describe the controller only. This page does not show `.jky` results, VM reports or a start-collection button.
+
+## Where the project information lives
+
+| Place | What to find there |
+| --- | --- |
+| `language/`, `ir/`, `examples/` | Language compiler, checked plan, example source and sample answers. |
+| `native/linux/`, `forensic-lib/`, `shared/` | Real Linux collector, collection rules and shared JSON formats. |
+| `controller/`, `dashboard/` | Basic service and browser status page. |
+| `tests/`, `fixtures/`, `ci/` | Automated checks and repeatable test inputs. |
+| [docs/README.md](README.md) | Menu of **how the project works**: architecture, language, diagnostics, result fields, Linux collector and supported scope. |
+| [docs/current-state.md](current-state.md) | Short answer to “what works today?” |
+| [project-records/README.md](../project-records/README.md) | Menu of **what was decided or tested**, including version results and saved evidence. |
+| [Version 5 verification](../project-records/version-5-verification.md) | Formal summary of V5 completion and limits. |
+| [Version 5 evidence index](../project-records/evidence/version-5/index.md) | Links to the actual test measurements and Debian reports. |
+
+`docs/` teaches **how**. `project-records/` preserves **what happened and why**. The [Version 3 checkpoint](../project-records/version-3-phases-4-5-checkpoint.md) is an earlier stage; [Version 3 verification](../project-records/version-3-verification.md) is its final result; [Version 5 verification](../project-records/version-5-verification.md) covers a later version. They overlap in background, but are not duplicate files. For individual file meanings, use the two folder menus above.
+
+## Small vocabulary for viva answers
+
+| Term | Simple explanation |
+| --- | --- |
+| Compiler / parser / type check | Tool that checks a program / part that reads grammar / check that values are the right kind. |
+| IR | Intermediate representation: a checked JSON plan made from source code. |
+| Fixture / provider | Prepared sample data / one prepared answer for a named function. |
+| Collector / endpoint | Program that reads chosen facts / computer being examined. |
+| Case / operator / scope | Investigation ID / person responsible / exact data allowed for one run. |
+| JSON / schema | Readable structured data / rules for its shape. |
+| Indicator / match | Value to compare, such as an IP or hash / equality with that value, not proof of malware. |
+| Hash | Fingerprint of file bytes; it identifies a byte sequence, not whether it is safe. |
+| VM / host / guest | Virtual computer / real computer running it / operating system inside it. |
+| Read-only / partial | Collector does not intentionally edit evidence / some requested facts could not be read. |
+| Dashboard / controller / API | Browser page / service behind it / way programs ask that service for information. |
+| CI | Automatic build and test checks when code is pushed. |

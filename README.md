@@ -371,7 +371,7 @@ the controller card becomes `Unavailable`, while the dashboard card stays
 
 For a short presentation, first run the [source and fixture commands](#quick-start)
 to show parsing, type checking and sample-data execution. Then use the
-[saved Debian report demo](docs/PROJECT_GUIDE.md#9-a-short-demonstration-for-the-teacher)
+[saved Debian report demo](docs/PROJECT_GUIDE.md#unit-2-show-real-debian-collector-results)
 to verify a real Version 5 VM result. Finish with the dashboard health view
 above. These are separate working paths today: the fixture run is sample data,
 the saved Debian report is native collection evidence, and the dashboard
