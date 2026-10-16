@@ -7,9 +7,9 @@ use std::path::Path;
 use std::process::{Command as ProcessCommand, Output};
 use std::time::{Duration, Instant};
 
-use jocky_language::cli::{
-    CliError, ProcessOutcome, SourceReader, USAGE, args_os, run_with_reader,
-};
+#[cfg(unix)]
+use jocky_language::cli::{CliError, args_os};
+use jocky_language::cli::{ProcessOutcome, SourceReader, USAGE, run_with_reader};
 use serde_json::Value;
 
 fn run_binary(arguments: &[&str]) -> Result<Output, Box<dyn Error>> {

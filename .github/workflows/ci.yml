@@ -16,6 +16,10 @@ jobs:
     name: Rust / Ubuntu
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      CARGO_INCREMENTAL: 0
+      CARGO_PROFILE_DEV_DEBUG: 0
+      CARGO_PROFILE_TEST_DEBUG: 0
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -29,15 +33,14 @@ jobs:
       - run: cargo clippy --offline --workspace --all-targets --locked -- -D warnings
       - name: Versions 0–3 regression, goldens, bounds and fixed-seed campaigns
         run: cargo test --offline --workspace --locked
-      - name: Version 3 deployed schemas and fixture/file safety
-        run: |
-          cargo test --offline --locked -p jocky-ir --test schema --test report --test safety
-          cargo test --offline --locked -p jocky-language --test artifact_io --test artifact_reads --test artifact_publish --test fixture_cli
-
   rust-windows:
     name: Rust / Windows
     runs-on: windows-latest
     timeout-minutes: 20
+    env:
+      CARGO_INCREMENTAL: 0
+      CARGO_PROFILE_DEV_DEBUG: 0
+      CARGO_PROFILE_TEST_DEBUG: 0
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -51,11 +54,6 @@ jobs:
       - run: cargo clippy --offline --workspace --exclude jocky-native-linux --all-targets --locked -- -D warnings
       - name: Versions 0–3 regression, goldens, bounds and fixed-seed campaigns
         run: cargo test --offline --workspace --exclude jocky-native-linux --locked
-      - name: Version 3 deployed schemas and fixture/file safety
-        run: |
-          cargo test --offline --locked -p jocky-ir --test schema --test report --test safety
-          cargo test --offline --locked -p jocky-language --test artifact_io --test artifact_reads --test artifact_publish --test fixture_cli
-
   native-linux-offline:
     name: Linux adapter / ${{ matrix.toolchain }} / ${{ matrix.profile }}
     runs-on: ubuntu-latest

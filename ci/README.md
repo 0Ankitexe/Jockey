@@ -11,9 +11,11 @@ collector and agent work is outside the active roadmap (ADR-0023), not reported 
 
 GitHub Actions jobs live in `.github/workflows/ci.yml`. The Ubuntu and Windows
 Rust jobs fetch locked dependencies, then run formatting, offline Clippy and
-workspace tests. The Windows job excludes the Linux-only native collector crate;
-the Linux adapter matrix tests it separately. The portable workspace checks include
-the complete Version 0–3 suites and actual
+workspace tests once. The workspace run already includes its package integration
+tests, so the Ubuntu and Windows jobs do not repeat them in a second Cargo step.
+Reduced debug information limits hosted runner disk use. The Windows job excludes
+the Linux-only native collector crate; the Linux adapter matrix tests it separately.
+The portable workspace checks include the complete Version 0–3 suites and actual
 `jockyc` binary tests on both newline/path platforms. The dedicated robustness
 target uses a fixed seed and standard-library generation, so it is repeatable
 without a fuzzing service.
@@ -46,9 +48,9 @@ verification record for checks actually executed.
 
 ## Version 3 gates
 
-Both Rust jobs explicitly repeat deployed schema/report/safety tests and the
-actual fixture/file-adapter integrations after the full regression suite. The
-portable workspace suite includes 20 IR goldens, 36 verifier-negative artifacts, ten-run
+The Rust workspace suite includes deployed schema/report/safety tests and the
+actual fixture/file-adapter integrations. The portable workspace suite includes
+20 IR goldens, 36 verifier-negative artifacts, ten-run
 library/CLI determinism, resource boundaries and three fixed-seed 10,000-case IR
 campaigns. Each campaign has a five-minute harness budget; jobs have a 20-minute
 ceiling. No fuzzing service, native collector or live endpoint is used.
