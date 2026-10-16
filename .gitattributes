@@ -1,2 +1,10 @@
 # Rustfmt requires Unix newlines on every runner, including Windows.
 *.rs text eol=lf
+
+# Byte-exact fixtures and source inputs must match on Linux and Windows.
+*.json text eol=lf
+*.jsonl text eol=lf
+*.jky text eol=lf
+*.stderr text eol=lf
+*.stdout text eol=lf
+*.log text eol=lf
